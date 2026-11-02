@@ -1,10 +1,11 @@
-"""Persistent book catalog with REST endpoints for topic and item queries."""
+"""Persistent book catalog with REST queries and inventory/price updates."""
 
 import sqlite3
 from contextlib import closing
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 
 # Resolve relative to this file so running from another folder uses the same DB.
@@ -92,6 +93,66 @@ def query_by_item(item_id):
         topic=topic,
         price=price_cents / 100,
         quantity=quantity,
+    )
+
+
+@app.patch("/update/<int:item_id>")
+def update_book(item_id):
+    """Update price and/or stock without allowing concurrent overselling."""
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict) or not data or set(data) - {"stock_delta", "price"}:
+        return jsonify(error="Provide stock_delta and/or price as JSON"), 400
+
+    # SQLite stores signed 64-bit integers. Reject booleans and fractional stock.
+    max_integer = 2**63 - 1
+    delta = data.get("stock_delta", 0)
+    if type(delta) is not int or abs(delta) > max_integer:
+        return jsonify(error="stock_delta must be a supported integer"), 400
+
+    price_cents = None
+    if "price" in data:
+        if type(data["price"]) not in (int, float):
+            return jsonify(error="price must be a number"), 400
+        try:
+            cents = Decimal(str(data["price"])) * 100
+            if (not cents.is_finite() or cents < 0 or cents > max_integer
+                    or cents != cents.to_integral_value()):
+                raise ValueError()
+            price_cents = int(cents)
+        except (InvalidOperation, ValueError):
+            return jsonify(error="price must be nonnegative with at most two decimal places"), 400
+
+    if item_id > max_integer:
+        return jsonify(error="Book not found"), 404
+
+    with closing(sqlite3.connect(DATABASE_PATH, timeout=15)) as connection:
+        with connection:
+            # Acquire the write lock BEFORE reading stock. Other updates wait.
+            connection.execute("BEGIN IMMEDIATE")
+            book = connection.execute(
+                "SELECT id, title, topic, price_cents, quantity FROM books WHERE id = ?",
+                (item_id,),
+            ).fetchone()
+            if book is None:
+                return jsonify(error="Book not found"), 404
+
+            book_id, title, topic, old_price_cents, quantity = book
+            new_quantity = quantity + delta
+            if new_quantity < 0:
+                return jsonify(error="Insufficient stock"), 409
+            if new_quantity > max_integer:
+                return jsonify(error="Stock exceeds supported limit"), 400
+
+            new_price_cents = old_price_cents if price_cents is None else price_cents
+            connection.execute(
+                "UPDATE books SET quantity = ?, price_cents = ? WHERE id = ?",
+                (new_quantity, new_price_cents, item_id),
+            )
+
+    # Return this transaction's values rather than reading a later update.
+    return jsonify(
+        id=book_id, title=title, topic=topic,
+        price=new_price_cents / 100, quantity=new_quantity,
     )
 
 
