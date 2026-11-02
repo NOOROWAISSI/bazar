@@ -1,0 +1,9 @@
+Bazar.com - Lab 1
+
+1. Open a terminal in this folder.
+2. Run: docker compose -p bazar up --build -d --wait
+3. Open: http://localhost:5000/search/distributed%20systems
+4. Run host client: python client.py
+5. Read README.md and docs/design.pdf for full instructions.
+
+Frontend is a REST gateway; no GUI is required.
