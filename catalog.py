@@ -1,4 +1,4 @@
-"""Persistent book catalog with a REST endpoint for topic searches."""
+"""Persistent book catalog with REST endpoints for topic and item queries."""
 
 import sqlite3
 from contextlib import closing
@@ -67,6 +67,32 @@ def search_by_topic(topic):
         for book_id, title in books
     ]
     return jsonify(results)
+
+
+@app.get("/query/item/<int:item_id>")
+def query_by_item(item_id):
+    """Return a book's details for stock checks and user information."""
+    with closing(sqlite3.connect(DATABASE_PATH)) as connection:
+        book = connection.execute(
+            """
+            SELECT id, title, topic, price_cents, quantity
+            FROM books
+            WHERE id = ?
+            """,
+            (item_id,),
+        ).fetchone()
+
+    if book is None:
+        return jsonify(error="Book not found"), 404
+
+    book_id, title, topic, price_cents, quantity = book
+    return jsonify(
+        id=book_id,
+        title=title,
+        topic=topic,
+        price=price_cents / 100,
+        quantity=quantity,
+    )
 
 
 # Initialize for both direct execution and Flask's CLI / WSGI imports.
