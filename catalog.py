@@ -1,8 +1,10 @@
-"""Step 1: create and seed the bookstore's persistent catalog."""
+"""Persistent book catalog with a REST endpoint for topic searches."""
 
 import sqlite3
 from contextlib import closing
 from pathlib import Path
+
+from flask import Flask, jsonify
 
 
 # Resolve relative to this file so running from another folder uses the same DB.
@@ -16,6 +18,9 @@ BOOKS = [
     (3, "Xen and the Art of Surviving Undergraduate School.", "undergraduate school", 3500, 10),
     (4, "Cooking for the Impatient Undergrad.", "undergraduate school", 2500, 10),
 ]
+
+
+app = Flask(__name__)
 
 
 def initialize_database():
@@ -43,14 +48,29 @@ def initialize_database():
             """, BOOKS)
 
 
-if __name__ == "__main__":
-    initialize_database()
-    print(f"Catalog database ready: {DATABASE_PATH}")
+@app.get("/query/topic/<topic>")
+def search_by_topic(topic):
+    """Return IDs and titles for books matching a topic, ignoring case."""
     with closing(sqlite3.connect(DATABASE_PATH)) as connection:
         books = connection.execute(
-            "SELECT id, title, topic, price_cents, quantity FROM books ORDER BY id"
+            """
+            SELECT id, title
+            FROM books
+            WHERE lower(topic) = lower(?)
+            ORDER BY id
+            """,
+            (topic,),
         ).fetchall()
 
-    for book_id, title, topic, price_cents, quantity in books:
-        print(f"{book_id}. {title}")
-        print(f"   Topic: {topic} | Price: {price_cents / 100:.2f} | Stock: {quantity}")
+    results = [
+        {"id": book_id, "title": title}
+        for book_id, title in books
+    ]
+    return jsonify(results)
+
+
+# Initialize for both direct execution and Flask's CLI / WSGI imports.
+initialize_database()
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=5001)
