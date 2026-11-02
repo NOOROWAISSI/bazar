@@ -1,5 +1,6 @@
 """Persistent catalog. Conditional stock updates serialize competing purchases."""
 import os
+from contextlib import contextmanager
 import sqlite3
 from pathlib import Path
 from flask import request, abort
@@ -7,8 +8,15 @@ from common import application
 
 DB = os.environ.get('CATALOG_DB', 'data/catalog.db')
 Path(DB).parent.mkdir(parents=True, exist_ok=True)
+@contextmanager
 def connect():
-    return sqlite3.connect(DB, timeout=15)
+    """Commit or roll back each transaction, then release its file handle."""
+    db = sqlite3.connect(DB, timeout=15)
+    try:
+        with db:
+            yield db
+    finally:
+        db.close()
 
 with connect() as db:
     db.execute('PRAGMA journal_mode=WAL')
@@ -46,8 +54,8 @@ def update(item):
     if not isinstance(data, dict) or not data or set(data)-{'stock_delta', 'price'}:
         abort(400, 'Provide stock_delta and/or price')
     delta = data.get('stock_delta', 0)
-    if type(delta) is not int:
-        abort(400, 'stock_delta must be an integer')
+    if type(delta) is not int or abs(delta) > 1000000000:
+        abort(400, 'stock_delta must be an integer between -1000000000 and 1000000000')
     cents = None
     if 'price' in data:
         try:
@@ -62,6 +70,8 @@ def update(item):
         row = db.execute('SELECT quantity FROM books WHERE id=?', (item,)).fetchone()
         if row is None:
             abort(404, 'Unknown item')
+        if row[0]+delta > 1000000000:
+            abort(400, 'Stock limit exceeded')
         if row[0]+delta < 0:
             abort(409, 'Out of stock')
         db.execute('UPDATE books SET quantity=quantity+?, price_cents=COALESCE(?,price_cents) WHERE id=?', (delta,cents,item))
