@@ -1,0 +1,44 @@
+services:
+  catalog:
+    build: .
+    command: ["waitress-serve", "--listen=0.0.0.0:5001", "catalog:app"]
+    environment:
+      CATALOG_DB: /data/catalog.db
+    volumes:
+      - catalog-data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5001/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  order:
+    build: .
+    command: ["waitress-serve", "--listen=0.0.0.0:5002", "order:app"]
+    environment:
+      CATALOG_URL: http://catalog:5001
+      ORDER_DB: /data/orders.db
+    volumes:
+      - order-data:/data
+    depends_on:
+      catalog:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5002/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  frontend:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      CATALOG_URL: http://catalog:5001
+      ORDER_URL: http://order:5002
+    depends_on:
+      catalog:
+        condition: service_healthy
+      order:
+        condition: service_healthy
+volumes:
+  catalog-data:
+  order-data:
