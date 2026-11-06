@@ -1,0 +1,62 @@
+Actual host client verification against real Frontend, Catalog and Sara Order.
+All services ran on temporary local ports with disposable databases.
+No normal inventory or shared branch was modified.
+
+$ python client.py search distributed systems
+Books found:
+1: How to get a good grade in DOS in 40 minutes a day.
+2: RPCs for Noobs.
+Exit code: 0
+
+$ python client.py search undergraduate school
+Books found:
+3: Xen and the Art of Surviving Undergraduate School.
+4: Cooking for the Impatient Undergrad.
+Exit code: 0
+
+$ python client.py search unknown
+No books found.
+Exit code: 0
+
+$ python client.py info 2
+Book 2: RPCs for Noobs.
+Topic: distributed systems
+Price: 50.00
+Stock: 10
+Exit code: 0
+
+$ python client.py purchase 2
+bought book RPCs for Noobs.
+Order ID: 1
+Exit code: 0
+
+$ python client.py info 2
+Book 2: RPCs for Noobs.
+Topic: distributed systems
+Price: 50.00
+Stock: 9
+Exit code: 0
+
+$ python client.py info 999
+Error (HTTP 404): Book not found
+Exit code: 1
+
+$ python client.py purchase 3
+Error (HTTP 409): Insufficient stock
+Exit code: 1
+
+$ python client.py info 2
+Error: cannot reach Frontend or request timed out.
+Exit code: 1
+
+$ python client.py purchase 2
+Error: cannot reach Frontend or request timed out.
+Purchase outcome may be unknown; do not retry automatically.
+Exit code: 1
+
+$ python client.py info 0
+usage: client.py info [-h] item_id
+client.py info: error: argument item_id: book ID must be positive
+Exit code: 2
+
+PASS: searches, details, real purchase, saved order, stock decrement, errors and exit codes.
