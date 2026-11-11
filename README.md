@@ -75,6 +75,16 @@ Invoke-RestMethod -Uri 'http://127.0.0.1:5000/purchase/2' -Method Post
 
 Until Order is available, purchase forwarding returns JSON HTTP 503. Opening a purchase URL in a browser sends GET and returns 405; purchase requires POST.
 
+## Order service tests
+
+Run the Order service tests from the repository directory:
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+The tests use a controlled local Catalog API and a separate temporary SQLite database for each test. They do not modify the catalog source or local service databases.
+
 ## Configuration and persistence
 
 Frontend reads `CATALOG_URL` and `ORDER_URL` when it starts. Defaults are `http://127.0.0.1:5001` and `http://127.0.0.1:5002`. To change them, set environment variables in the Frontend terminal before starting it:
