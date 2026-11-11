@@ -1,0 +1,8 @@
+# Allow only service sources and requirements into the build context.
+*
+!Dockerfile
+!.dockerignore
+!requirements.txt
+!catalog.py
+!frontend.py
+!order.py
