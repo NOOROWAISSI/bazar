@@ -1,0 +1,44 @@
+Bazar full Docker verification: 2026-11-11T00:21:31.249113+00:00
+
+PASS: three healthy Linux containers; only Frontend exposed to the host.
+
+$ python client.py search distributed systems
+Books found:
+1: How to get a good grade in DOS in 40 minutes a day.
+2: RPCs for Noobs.
+
+
+$ python client.py search undergraduate school
+Books found:
+3: Xen and the Art of Surviving Undergraduate School.
+4: Cooking for the Impatient Undergrad.
+
+
+$ python client.py info 2
+Book 2: RPCs for Noobs.
+Topic: distributed systems
+Price: 50.00
+Stock: 10
+
+
+$ python client.py purchase 2
+bought book RPCs for Noobs.
+Order ID: 1
+
+
+$ python client.py info 2
+Book 2: RPCs for Noobs.
+Topic: distributed systems
+Price: 50.00
+Stock: 9
+
+
+PASS: 30 concurrent purchases: 10 successful, 20 out of stock, quantity zero.
+
+PASS: down/up preserved inventory and 11 order records in named volumes.
+
+PASS: restock, price update and subsequent real purchase.
+
+PASS: unavailable Order returns JSON HTTP 503 through Frontend.
+
+PASS: complete integration verified; disposable containers/volumes removed. Normal application data unchanged.
