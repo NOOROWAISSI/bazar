@@ -1,115 +1,120 @@
-# Bazar.com - Catalog and Frontend
+# Bazar.com - Distributed Bookstore
 
-This branch contains Noor's part of the bookstore lab: a persistent Catalog API and a Frontend REST gateway. Frontend routes HTTP requests; it does not provide a graphical interface.
+Three Python microservices communicate over HTTP REST and JSON: Frontend routes user requests, Catalog owns books and inventory, and Order records purchases. SQLite persists catalog and order data separately. A host command-line client prints readable results and `bought book book_name` on success.
 
-Order, the host client, Dockerfiles and Docker Compose are Sara's assigned work. They are not included here yet. Real purchases require her Order service.
+The complete integrated project is on branch **noor**. Noor implemented Catalog/Frontend and the host client; Sara's Order service and tests are merged with their original commits preserved.
 
-## Local setup
+## Get the project
 
-Requirements: Python 3.11 or newer. Run these commands from this repository's directory.
+```powershell
+git clone --branch noor https://github.com/NOOROWAISSI/bazar.git
+cd bazar
+```
+
+## Run with Docker Compose
+
+Start Docker Desktop with Linux containers, then run from the project directory:
+
+```powershell
+docker compose up --build -d --wait
+docker compose ps
+```
+
+Only Frontend is published, at http://127.0.0.1:5000. Three containers run Waitress on 0.0.0.0 internally. Health checks order startup. Separate named volumes preserve the two databases.
+
+If port 5000 is occupied, set another host port before starting:
+
+```powershell
+$env:FRONTEND_PORT = '5050'
+docker compose up --build -d --wait
+```
+
+Use the corresponding port in client URLs. For stop/start without deleting data:
+
+```powershell
+docker compose down
+docker compose up -d --wait
+```
+
+`down` preserves volumes. Adding `-v` deliberately deletes inventory and order history.
+
+## Run the client on the host
+
+Python 3.11 or newer is needed for the supplied host scripts. Use your full Python executable path for the first command if `python` is not on PATH. Activation is optional because the commands call the environment directly.
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe client.py search "distributed systems"
+.\.venv\Scripts\python.exe client.py search "undergraduate school"
+.\.venv\Scripts\python.exe client.py info 2
+.\.venv\Scripts\python.exe client.py purchase 2
 ```
 
-If `python` is not on PATH, use the full path of your Python interpreter for the first command. The remaining commands use the project's environment directly, so activation is not required.
-
-## Run the services
-
-Open two terminals in the repository directory. Keep both running.
-
-Terminal 1 - Catalog on port 5001:
+Purchase buys one real copy. It is never run automatically. For a different host port:
 
 ```powershell
-.\.venv\Scripts\python.exe catalog.py
+.\.venv\Scripts\python.exe client.py --base-url http://127.0.0.1:5050 info 2
 ```
 
-Terminal 2 - Frontend on port 5000:
+Search displays book IDs and titles, info displays topic/price/quantity, and purchase prints the title and order ID. Unknown IDs produce 404, insufficient stock 409, and unavailable dependencies 503. A timeout can leave a purchase outcome unknown; the client does not automatically retry.
 
-```powershell
-.\.venv\Scripts\python.exe frontend.py
-```
+## REST contracts
 
-Press Ctrl+C in each terminal to stop it. Restart the affected service after editing its source; automatic reloading is not enabled. These commands use Flask's local development server. Container/production server configuration is a separate integration task.
-
-## Try the gateway
-
-Open in a browser:
-
-- http://127.0.0.1:5000/search/distributed%20systems
-- http://127.0.0.1:5000/search/undergraduate%20school
-- http://127.0.0.1:5000/search/unknown
-- http://127.0.0.1:5000/info/2
-- http://127.0.0.1:5000/info/999
-
-The first two requests return books 1/2 and 3/4, respectively. An unknown topic returns an empty list with HTTP 200. An unknown book returns a JSON error with HTTP 404. `%20` encodes a space in a URL. The root `/` is not an implemented route.
-
-## REST interfaces
-
-| Service | Method and path | Purpose |
+| Service | Method and route | Purpose |
 | --- | --- | --- |
-| Frontend | GET /search/<topic> | Forward topic search to Catalog |
-| Frontend | GET /info/<id> | Forward book lookup to Catalog |
-| Frontend | POST /purchase/<id> | Forward purchase to Order |
-| Catalog | GET /query/topic/<topic> | Return matching IDs and titles |
-| Catalog | GET /query/item/<id> | Return book details |
-| Catalog | PATCH /update/<id> | Change stock and/or price |
+| Frontend | GET /search/<topic> | Topic search through Catalog |
+| Frontend | GET /info/<id> | Book details through Catalog |
+| Frontend | POST /purchase/<id> | Purchase through Order |
+| Catalog | GET /query/topic/<topic> | IDs and titles |
+| Catalog | GET /query/item/<id> | id, title, topic, price, quantity |
+| Catalog | PATCH /update/<id> | stock_delta and/or price |
+| Order | POST /purchase/<id> | Decrement stock and persist receipt |
+| Order | GET /health | Process availability |
 
-Book details contain `id`, `title`, `topic`, `price` and `quantity`. An update accepts `stock_delta`, `price`, or both, and returns the updated book. `stock_delta` is a change, not an absolute quantity.
+Example browser request: http://127.0.0.1:5000/search/distributed%20systems. `%20` encodes a space. The root `/` has no GUI. Purchase requires POST; opening its URL in a browser sends GET and returns 405.
 
-In a third PowerShell terminal, this example adds five copies to book 2 and changes its price to 45. It modifies your local database:
+Catalog update accepts e.g. `{"stock_delta": 5, "price": 45}`. A delta changes stock rather than setting it. Prices are nonnegative JSON numbers with at most two decimal places. Stock deltas are integers. Invalid updates return JSON 400; rejected combined changes do not partially update the book.
+
+Catalog is internal to Docker. To restock book 2:
 
 ```powershell
-$body = @{ stock_delta = 5; price = 45 } | ConvertTo-Json
-Invoke-RestMethod -Uri 'http://127.0.0.1:5001/update/2' -Method Patch -ContentType 'application/json' -Body $body
+docker compose exec catalog python -c "import json,urllib.request; r=urllib.request.Request('http://127.0.0.1:5001/update/2',data=json.dumps({'stock_delta':5}).encode(),method='PATCH',headers={'Content-Type':'application/json'}); print(urllib.request.urlopen(r).read().decode())"
 ```
 
-To subtract one copy, send `{"stock_delta": -1}`. Invalid updates return 400, an unknown book returns 404, and insufficient stock returns 409. Failed updates do not partially change the book.
+Restock explicitly when deliveries arrive; no artificial automatic stock source is assumed.
 
-After Sara starts Order on port 5002, test a purchase with:
+## Local three-process alternative
 
-```powershell
-Invoke-RestMethod -Uri 'http://127.0.0.1:5000/purchase/2' -Method Post
-```
-
-Until Order is available, purchase forwarding returns JSON HTTP 503. Opening a purchase URL in a browser sends GET and returns 405; purchase requires POST.
-
-## Order service tests
-
-Run the Order service tests from the repository directory:
+After installing requirements, open three terminals in this directory:
 
 ```powershell
-python -m unittest discover -s tests -v
-```
-
-The tests use a controlled local Catalog API and a separate temporary SQLite database for each test. They do not modify the catalog source or local service databases.
-
-## Configuration and persistence
-
-Frontend reads `CATALOG_URL` and `ORDER_URL` when it starts. Defaults are `http://127.0.0.1:5001` and `http://127.0.0.1:5002`. To change them, set environment variables in the Frontend terminal before starting it:
-
-```powershell
-$env:CATALOG_URL = 'http://127.0.0.1:5001'
-$env:ORDER_URL = 'http://127.0.0.1:5002'
+# Terminal 1
+.\.venv\Scripts\python.exe catalog.py
+# Terminal 2
+.\.venv\Scripts\python.exe order.py
+# Terminal 3
 .\.venv\Scripts\python.exe frontend.py
 ```
 
-Catalog creates `data/catalog.db` relative to catalog.py. It inserts missing seed books without resetting existing stock or prices. The database and virtual environment are ignored by Git; another developer gets a fresh database on first startup.
+These entry points use Flask's local development server. Restart the affected service after code edits. Docker uses Waitress instead. Local databases live in data/catalog.db and data/orders.db; local and Docker data are independent.
 
-The current services bind to loopback for local development. Binding to a reachable interface and configuring service URLs and volumes for Docker is still required during integration. Do not point another service directly at Catalog's SQLite file.
+Frontend reads CATALOG_URL and ORDER_URL at startup. Order reads CATALOG_URL and ORDER_DATABASE_PATH; Catalog reads CATALOG_DATABASE_PATH. Docker sets backend URLs to service names (`http://catalog:5001`, `http://order:5002`). To run across machines, use reachable addresses and a server binding such as `waitress-serve --listen=0.0.0.0:5001 catalog:app` after installing Waitress. Each backend owns its database; do not share SQLite files across hosts.
 
-## Verification status
+## Tests and actual output
 
-Completed locally over real HTTP:
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe verify_noor.py
+.\.venv\Scripts\python.exe verify_docker.py
+```
 
-- Both topic searches, unknown topics and case-insensitive matching.
-- All four book lookups and unknown-book JSON 404 responses.
-- Frontend responses match the real Catalog responses.
-- JSON errors for unavailable backends and incorrect routes/methods.
+The last command requires running Docker. It builds copies of the current sources in a temporary context with a unique Compose project, random host port and disposable volumes. It runs the host client, thirty concurrent real purchases, restock/price updates, unavailable-service handling and container-recreation persistence. It removes only its test containers/volumes. Your normal inventory stays unchanged.
 
-Catalog update verification used a disposable database: restock, decrement, price changes, combined updates, invalid inputs, persistence and concurrent stock safety. Thirty concurrent decrements for ten copies produced ten successful updates and twenty conflicts.
+Evidence: docs/test-output.txt (17 regression tests), docs/output-noor.txt (Catalog/gateway checks), docs/client-output.txt (host CLI), docs/docker-output.txt (full real integration), docs/docker-service-output.txt (component logs), docs/docker-status.json and docs/docker-build-output.txt. verify_noor.py uses an explicit Order test double for routing; verify_docker.py uses the real Order service.
 
-Purchase routing was previously verified using an explicitly simulated Order service, including backend status forwarding and invalid JSON handling. This is not a test of Sara's real Order implementation. Real purchase integration and three-container Docker verification remain pending.
+Inspect live logs with `docker compose logs --no-color`. All services log HTTP method/path/status; Order also logs successful book titles. The design report is [docs/design.pdf](docs/design.pdf), with editable text in [docs/design.md](docs/design.md). More examples are in docs/client.md and docs/docker.md.
 
-See [design notes](docs/design.md) for the design and known limitations.
+## Known limitations
+
+Catalog serializes stock writes, but decrementing stock and inserting an order are not one distributed transaction. Order attempts to restore stock when local order storage fails. Crashes, ambiguous network outcomes or failed compensation can still need reconciliation. There are no idempotency keys, authentication or payment/shipping workflows. These cases and possible improvements are explained in the report.

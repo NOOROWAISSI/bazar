@@ -1,51 +1,57 @@
-# Bazar.com design notes - Noor's contribution
+# Bazar.com: Design and execution report
 
-This is a draft covering Catalog and Frontend. It must be combined with Sara's Order, client and Docker description before producing the final lab report. It does not claim that the whole assignment has been integrated or deployed.
+Distributed and Operating Systems - Lab 1 | Noor and Sara
 
-## Architecture and request flow
+## Architecture and interfaces
 
-Catalog and Frontend are independent Flask applications. Frontend is the public REST entry point: it accepts user requests and calls a backend over HTTP. It does not read SQLite directly, manage inventory, or record orders. Its configurable backend URLs allow integration without embedding another service's storage location.
+Bazar.com is a two-tier bookstore with three independent Python microservices. Frontend is a REST gateway accepting user requests, while Catalog and Order form the backend. Each service is a separate process/container. The host command-line client sends HTTP requests to Frontend; all inter-service calls use HTTP and JSON. No graphical interface is required.
 
-Search flows from Client to Frontend GET /search/<topic>, then to Catalog GET /query/topic/<topic>. Catalog returns IDs and titles matching the topic. Information flows from Client to Frontend GET /info/<id>, then to Catalog GET /query/item/<id>. The response includes title, topic, quantity and price.
+Search follows Client -> Frontend GET /search/<topic> -> Catalog GET /query/topic/<topic>. Catalog returns matching book IDs and titles. Information follows Frontend GET /info/<id> -> Catalog GET /query/item/<id>, returning ID, title, topic, price and available quantity. Topics match case-insensitively. Unknown topics return an empty array; unknown books return JSON HTTP 404.
 
-Purchase forwarding goes from Frontend POST /purchase/<id> to Order POST /purchase/<id>. Sara's service is expected to query Catalog, request a decrement and persist a successful order. The real Order behavior must be verified during integration; Frontend implements routing only.
+Purchase follows Client POST /purchase/<id> -> Frontend -> Order. Order queries Catalog for book details and requests PATCH /update/<id> with stock_delta=-1. Catalog checks the latest stock inside a write transaction. Order saves a successful purchase in its own SQLite database and returns HTTP 201 with an order ID and title. Insufficient stock returns HTTP 409. The client and Order log the required bought book book_name message.
 
-## Data model and persistence
+## Persistent data
 
-Catalog owns a SQLite books table with a unique integer ID, non-null title and topic, integer price_cents and integer quantity. Database checks prevent negative prices and stock. The initial titles are the four books from the lab. Books 1 and 2 are distributed systems books; books 3 and 4 belong to undergraduate school. Initial quantities of ten and prices of 40, 50, 35 and 25 are implementation choices, not values prescribed by the assignment.
+Catalog owns a books table: unique integer ID, title, topic, integer price_cents and quantity. The four titles are those specified by the assignment; books 1-2 are distributed systems and books 3-4 are undergraduate school. Initial quantities of ten and prices of 40, 50, 35 and 25 are chosen sample values. Startup inserts missing seed rows without resetting existing stock or prices.
 
-Money is stored in cents to avoid storing approximate binary floating-point values. API prices are returned in ordinary units, for example 5000 cents becomes 50.0. Incoming prices must be JSON numbers, nonnegative and representable with at most two decimal places. Decimal validates their conversion before integer storage.
+Prices are stored in integer cents to avoid approximate monetary storage. API prices are JSON numbers in normal units. Decimal validates nonnegative incoming prices with at most two fractional digits. Database constraints reject negative prices and quantities. Order stores a generated ID, book ID, title, price snapshot and UTC creation time. Each backend opens and closes its own SQLite connections; databases are never shared between services.
 
-Catalog creates its database beside the source in data/catalog.db. INSERT OR IGNORE inserts missing seed rows without overwriting existing IDs. Repeated startup therefore preserves normal stock and price changes. Each operation opens and closes its own database connection. Local data is excluded from version control.
+<!-- pagebreak -->
 
-## Updates and concurrent requests
+## Concurrency and update validation
 
-PATCH /update/<id> accepts a signed integer stock_delta and/or a price. A positive delta restocks a book; a negative delta subtracts copies. Booleans, fractional stock, unknown fields, empty or malformed requests and unsupported integer ranges are rejected. Missing books produce 404, inadequate stock 409 and invalid input 400. Successful updates return the exact values written by that transaction.
+PATCH /update/<id> accepts stock_delta, price, or both. Positive deltas restock a title; negative deltas remove copies. Empty/malformed requests, unknown fields, boolean or fractional deltas, unsupported integer ranges and invalid prices produce JSON HTTP 400. A rejected combined update leaves both stock and price unchanged.
 
-The update begins with BEGIN IMMEDIATE before reading stock. SQLite acquires a write reservation, so another updater must wait rather than checking the same old quantity concurrently. The transaction reads the current stock, checks the proposed result, updates quantity and price, and commits together. Rejection leaves both fields unchanged. Connections wait up to fifteen seconds for SQLite locks.
+Catalog begins BEGIN IMMEDIATE before reading quantity. SQLite reserves the write transaction, forcing competing updates to wait rather than all reading the same old stock. The service checks the proposed quantity, writes both fields and commits together. A decrease below zero returns 409. Thus an earlier availability query cannot authorize a stale decrement. Waitress supplies concurrent worker threads in Docker, while stock consistency is enforced by the database transaction.
 
-This is important even when Order performs an earlier availability check. That earlier check may become outdated; Catalog must validate the actual decrement inside the write transaction. A disposable-database check sent thirty concurrent decrements for ten copies and observed exactly ten successes, twenty conflicts and zero remaining stock.
+## Failure behavior and tradeoffs
 
-## Gateway responses and failures
+Frontend preserves backend JSON/status and bounds socket waits to five seconds. Order uses bounded Catalog requests. Connection failures return JSON 503; invalid upstream JSON produces a gateway 502. Requests are not automatically retried. A timeout can occur after a server committed, so failure to receive a response does not prove that a purchase did not happen.
 
-Frontend forwards each request once with a five-second connection/read timeout setting and preserves backend JSON and status, including 404 and 409 results. It percent-encodes topic values when building backend URLs. Invalid backend JSON produces a gateway 502 response, while connection or timeout failures produce JSON 503. Local HTTP errors such as an unknown route or a disallowed method also return JSON. Request method, path and status are logged.
+Catalog stock safety is not a distributed all-or-nothing purchase. If order insertion fails after a decrement, Order attempts a compensating stock increment. Compensation can fail or time out; a crash can occur before it is attempted. Commit or network ambiguity can require manual reconciliation. A lookup-time price snapshot can also become stale if an operator changes the price during a purchase. These limitations are explicit rather than presented as exactly-once processing.
 
-A purchase is not automatically retried. An unavailable connection or timeout does not always establish that the backend made no changes: it may have committed before the response was lost. Users must not assume an ambiguous purchase is safe to repeat. The timeout setting limits socket waits; it is not an end-to-end distributed transaction deadline.
+SQLite and lightweight Flask services suit the small lab, avoiding heavyweight database/framework administration. SQLite serializes writers and may encounter lock contention under heavy loads. Named volumes preserve data, but they are not backup or disaster-recovery mechanisms. Frontend routes by operation; it does not balance traffic across replicas. There is no authentication, payment processing, cancellation or shipping workflow, and inventory administration is intended for trusted operators.
 
-## Tradeoffs and remaining limitations
+## Improvements and extensions
 
-SQLite keeps this small assignment lightweight, but it serializes writers and can time out under heavy write contention. The database should remain owned by Catalog rather than shared as a file between services. Prices in responses use JSON numbers, while stored prices remain integer cents.
+A stronger design would use client-generated purchase keys, durable Catalog reservations and a unique matching Order receipt. Repeated keys could return the original outcome, while a reconciliation worker completes pending orders or releases abandoned reservations. A reservation could carry the authoritative purchase price. Authentication for inventory updates, structured request IDs, latency/error metrics, backups and an idempotent delivery feed are further extensions. Automatic restock is not fabricated; operators apply real delivery changes through the update API.
 
-The current local programs use Flask's development server and bind to 127.0.0.1. The deployment stage must provide suitable interface binding, concurrent serving and persistent Docker volumes. Real Order integration and Docker execution are not complete in this contribution.
+<!-- pagebreak -->
 
-A stock decrement and an Order database insert are separate transactions in different services. Catalog's stock safety does not guarantee an all-or-nothing distributed purchase. A failure between these operations can require reconciliation. A future design could add purchase identifiers, durable reservations and a reconciliation process so retries can identify prior outcomes safely.
+## Running and deploying the program
 
-There is no authentication, TLS, payment, cancellation or shipping implementation. Backend inventory updates should remain restricted to trusted callers during deployment. There are no load-balanced replicas; Frontend routes requests by operation.
+Clone branch noor, enter the repository and run docker compose up --build -d --wait with Docker Desktop in Linux-container mode. docker compose ps shows the three services. Each container runs Waitress on 0.0.0.0; Catalog is catalog:5001, Order is order:5002, and Frontend is frontend:5000 inside the private network. Only Frontend is published to host loopback port 5000. FRONTEND_PORT can select another host port. Health checks sequence startup.
 
-## Verification and next integration work
+Catalog mounts its named volume at /app/data; Order mounts a separate volume at /data. docker compose down removes containers but retains these volumes. docker compose up -d --wait recreates containers with saved data. Adding -v intentionally deletes the databases. The build context allows only service sources and dependency/build files, excluding local data, Git history, environments and unrelated directories.
 
-Real-HTTP checks covered Catalog lookups through Frontend, both topic categories, empty results, unknown IDs, method/path errors and unavailable services. Update checks covered input validation, combined changes, no partial writes on rejection, persistence and concurrent decrements. Test inventory was disposable and did not change the normal database.
+For the host client, create .venv with python -m venv .venv and install requirements using .venv/Scripts/python.exe -m pip install -r requirements.txt on Windows. Run client.py search "distributed systems", client.py info 2 or client.py purchase 2 through that interpreter. --base-url selects another Frontend address. Search/info print readable results; purchase prints bought book followed by the actual title. The client remains outside Docker.
 
-A simulated Order verified routing and backend status handling only. Next, both developers should start the real services, purchase a book through Frontend, verify that stock falls by one and inspect the persisted Order record. They should then verify out-of-stock behavior, concurrent purchases, service restarts and three-container deployment. Actual client/component output and the final combined two-to-three-page report belong in docs for submission.
+For local development, run catalog.py, order.py and frontend.py in separate terminals on ports 5001, 5002 and 5000. These entry points use Flask's development server. Configure reachable backend URLs and an appropriate server bind when using separate machines. Catalog and Order storage paths can be set through environment variables; each service retains ownership of its SQLite file. The README includes exact commands, inventory updates and log inspection.
 
-The README provides local setup, API paths, examples and expected error behavior. It should be updated after Docker and the real Order service are integrated.
+## Testing and measured results
+
+The integrated regression suite passed 17 tests covering Catalog stock safety and Order success, persistence, concurrent buyers, dependency failures and compensation. verify_noor.py verifies Catalog/gateway behavior using a clearly identified Order test double for routing; it is not evidence of real order processing.
+
+verify_docker.py builds the current integrated sources in a temporary context and runs three real Linux containers with disposable volumes. The host client searched both categories and bought book 2, observing stock drop from ten to nine. Thirty real concurrent purchases for ten copies yielded ten HTTP 201 responses, twenty HTTP 409 responses and zero remaining stock. Container removal/recreation preserved stock and eleven orders. Restock, price change, another purchase and unavailable-Order JSON 503 behavior were also verified.
+
+Actual test, client, build, status and component output is retained in docs. All services log request outcomes, and Order logs purchased titles. Test containers/volumes are removed afterward without altering normal data. Git history preserves both contributors' work and separate integration, deployment, verification and documentation commits. The source, report and execution evidence are delivered together on noor.

@@ -22,6 +22,6 @@ To use another Frontend address, place the option before the command:
 
 Successful commands exit with code 0. Server/network/response errors exit with code 1, and invalid command-line arguments exit with code 2. Backend errors are displayed with their HTTP status. A failed or timed-out purchase can have an ambiguous outcome; do not automatically retry it.
 
-Sara's Order implementation is required for a real purchase. Her branch contains it; Noor's branch must be integrated with that work before all three services can run together. This client addition does not merge branches or implement Docker deployment.
+The integrated noor branch includes Sara's real Order service. Start all three services locally or use Docker Compose before purchasing. See ../README.md for the complete setup.
 
 `client-output.txt` records actual execution against copies of all three services using disposable databases. It does not change normal inventory.
