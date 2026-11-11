@@ -1,5 +1,6 @@
 """Order service with persistent SQLite storage."""
 
+import logging
 import os
 import sqlite3
 from contextlib import closing
@@ -7,7 +8,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+from werkzeug.exceptions import HTTPException
 
 
 DATABASE_PATH = Path(
@@ -20,13 +22,25 @@ CATALOG_URL = os.environ.get("CATALOG_URL", "http://127.0.0.1:5001").rstrip("/")
 CATALOG_TIMEOUT = (3.05, 5)
 
 app = Flask(__name__)
+app.logger.setLevel(logging.INFO)
+
+
+@app.errorhandler(HTTPException)
+def json_error(error):
+    return jsonify(error=error.description), error.code
+
+
+@app.after_request
+def log_request(response):
+    app.logger.info("%s %s -> %s", request.method, request.path, response.status_code)
+    return response
 
 
 def initialize_database():
     """Create the orders database and table when they do not exist."""
     DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-    with closing(sqlite3.connect(DATABASE_PATH)) as connection:
+    with closing(sqlite3.connect(DATABASE_PATH, timeout=15)) as connection:
         with connection:
             connection.execute("""
                 CREATE TABLE IF NOT EXISTS orders (
@@ -89,7 +103,7 @@ def purchase(item_id):
         ), 502
 
     try:
-        with closing(sqlite3.connect(DATABASE_PATH)) as connection:
+        with closing(sqlite3.connect(DATABASE_PATH, timeout=15)) as connection:
             with connection:
                 cursor = connection.execute(
                     """
@@ -115,11 +129,12 @@ def purchase(item_id):
             ), 500
         return jsonify(error="Could not save the order; stock was restored"), 500
 
+    app.logger.info("bought book %s", title)
     return jsonify(
         order_id=order_id,
         item=item_id,
         title=title,
-        message="Purchase successful",
+        message="bought book " + title,
     ), 201
 
 

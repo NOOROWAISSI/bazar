@@ -1,15 +1,18 @@
 """Persistent book catalog with REST queries and inventory/price updates."""
 
+import logging
+import os
 import sqlite3
 from contextlib import closing
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 from flask import Flask, jsonify, request
+from werkzeug.exceptions import HTTPException
 
 
 # Resolve relative to this file so running from another folder uses the same DB.
-DATABASE_PATH = Path(__file__).resolve().parent / "data" / "catalog.db"
+DATABASE_PATH = Path(os.environ.get("CATALOG_DATABASE_PATH", Path(__file__).resolve().parent / "data" / "catalog.db"))
 
 # Initial quantities and prices are sample choices; the lab does not fix them.
 # Store money in integer cents: 4000 cents means a price of 40.00.
@@ -22,6 +25,18 @@ BOOKS = [
 
 
 app = Flask(__name__)
+app.logger.setLevel(logging.INFO)
+
+
+@app.errorhandler(HTTPException)
+def json_error(error):
+    return jsonify(error=error.description), error.code
+
+
+@app.after_request
+def log_request(response):
+    app.logger.info("%s %s -> %s", request.method, request.path, response.status_code)
+    return response
 
 
 def initialize_database():
@@ -73,6 +88,8 @@ def search_by_topic(topic):
 @app.get("/query/item/<int:item_id>")
 def query_by_item(item_id):
     """Return a book's details for stock checks and user information."""
+    if item_id > 2**63 - 1:
+        return jsonify(error="Book not found"), 404
     with closing(sqlite3.connect(DATABASE_PATH)) as connection:
         book = connection.execute(
             """
