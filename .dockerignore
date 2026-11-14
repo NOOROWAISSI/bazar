@@ -1,0 +1,9 @@
+# Reference configuration authored by Noor (origin/noor, commit 1b874a6).
+# Allow only service sources and requirements into the build context.
+*
+!Dockerfile
+!.dockerignore
+!requirements.txt
+!catalog.py
+!frontend.py
+!order.py

@@ -1,0 +1,92 @@
+[2026-11-11 02:22:07,519] INFO in catalog: GET /query/topic/distributed systems -> 200
+[2026-11-11 02:22:07,526] INFO in catalog: GET /query/topic/undergraduate school -> 200
+[2026-11-11 02:22:07,533] INFO in catalog: GET /query/topic/DISTRIBUTED SYSTEMS -> 200
+[2026-11-11 02:22:07,539] INFO in catalog: GET /query/topic/unknown -> 200
+[2026-11-11 02:22:07,556] INFO in catalog: GET /query/item/1 -> 200
+[2026-11-11 02:22:07,561] INFO in catalog: GET /query/item/2 -> 200
+[2026-11-11 02:22:07,567] INFO in catalog: GET /query/item/3 -> 200
+[2026-11-11 02:22:07,586] INFO in catalog: GET /query/item/4 -> 200
+[2026-11-11 02:22:07,591] INFO in catalog: GET /query/item/999 -> 404
+[2026-11-11 02:22:07,602] INFO in catalog: PATCH /update/2 -> 200
+[2026-11-11 02:22:07,605] INFO in catalog: PATCH /update/2 -> 409
+[2026-11-11 02:22:07,610] INFO in catalog: GET /query/item/2 -> 200
+[2026-11-11 02:22:07,613] INFO in catalog: PATCH /update/2 -> 400
+[2026-11-11 02:22:07,616] INFO in catalog: PATCH /update/2 -> 400
+[2026-11-11 02:22:07,618] INFO in catalog: PATCH /update/2 -> 400
+[2026-11-11 02:22:07,633] INFO in catalog: PATCH /update/2 -> 400
+[2026-11-11 02:22:07,634] INFO in catalog: PATCH /update/2 -> 400
+[2026-11-11 02:22:07,639] INFO in catalog: PATCH /update/2 -> 400
+[2026-11-11 02:22:07,641] INFO in catalog: PATCH /update/2 -> 400
+[2026-11-11 02:22:07,663] INFO in catalog: PATCH /update/2 -> 400
+[2026-11-11 02:22:07,667] INFO in catalog: PATCH /update/999 -> 404
+[2026-11-11 02:22:07,681] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,690] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,697] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,710] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,718] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,731] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,747] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,761] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,775] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,787] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-11 02:22:07,796] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,800] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,807] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,809] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,823] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,839] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,855] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,862] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,876] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,892] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,907] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,922] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,953] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,954] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,974] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:07,990] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:08,006] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:08,036] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:08,051] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:08,098] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-11 02:22:08,104] INFO in catalog: GET /query/item/1 -> 200
+[2026-11-11 02:22:08,110] INFO in catalog: GET /query/item/1 -> 200
+[2026-11-11 02:22:08,118] INFO in catalog: GET /query/item/2 -> 200
+[2026-11-11 02:22:08,170] INFO in catalog: GET /query/item/2 -> 200
+GET /search/distributed%20systems -> 200 [{"id": 1, "title": "How to get a good grade in DOS in 40 minutes a day."}, {"id": 2, "title": "RPCs for Noobs."}]
+GET /search/undergraduate%20school -> 200 [{"id": 3, "title": "Xen and the Art of Surviving Undergraduate School."}, {"id": 4, "title": "Cooking for the Impatient Undergrad."}]
+GET /search/DISTRIBUTED%20SYSTEMS -> 200 [{"id": 1, "title": "How to get a good grade in DOS in 40 minutes a day."}, {"id": 2, "title": "RPCs for Noobs."}]
+GET /search/unknown -> 200 []
+GET /info/1 -> 200 {"id": 1, "price": 40.0, "quantity": 10, "title": "How to get a good grade in DOS in 40 minutes a day.", "topic": "distributed systems"}
+GET /info/2 -> 200 {"id": 2, "price": 50.0, "quantity": 10, "title": "RPCs for Noobs.", "topic": "distributed systems"}
+GET /info/3 -> 200 {"id": 3, "price": 35.0, "quantity": 10, "title": "Xen and the Art of Surviving Undergraduate School.", "topic": "undergraduate school"}
+GET /info/4 -> 200 {"id": 4, "price": 25.0, "quantity": 10, "title": "Cooking for the Impatient Undergrad.", "topic": "undergraduate school"}
+GET /info/999 -> 404 {"error": "Book not found"}
+PATCH /update/2 -> 200 {"id": 2, "price": 42.75, "quantity": 15, "title": "RPCs for Noobs.", "topic": "distributed systems"}
+PATCH /update/2 -> 409 {"error": "Insufficient stock"}
+GET /info/2 -> 200 {"id": 2, "price": 42.75, "quantity": 15, "title": "RPCs for Noobs.", "topic": "distributed systems"}
+PATCH /update/2 -> 400 {"error": "Provide stock_delta and/or price as JSON"}
+PATCH /update/2 -> 400 {"error": "stock_delta must be a supported integer"}
+PATCH /update/2 -> 400 {"error": "stock_delta must be a supported integer"}
+PATCH /update/2 -> 400 {"error": "price must be nonnegative with at most two decimal places"}
+PATCH /update/2 -> 400 {"error": "price must be nonnegative with at most two decimal places"}
+PATCH /update/2 -> 400 {"error": "price must be a number"}
+PATCH /update/2 -> 400 {"error": "Provide stock_delta and/or price as JSON"}
+PATCH /update/2 -> 400 {"error": "stock_delta must be a supported integer"}
+PATCH /update/999 -> 404 {"error": "Book not found"}
+GET /info/1 -> 200 {"id": 1, "price": 40.0, "quantity": 0, "title": "How to get a good grade in DOS in 40 minutes a day.", "topic": "distributed systems"}
+PASS: thirty concurrent stock decrements: ten successes, twenty conflicts
+GET /info/1 -> 200 {"id": 1, "price": 40.0, "quantity": 0, "title": "How to get a good grade in DOS in 40 minutes a day.", "topic": "distributed systems"}
+GET /info/2 -> 200 {"id": 2, "price": 42.75, "quantity": 15, "title": "RPCs for Noobs.", "topic": "distributed systems"}
+PASS: initialization preserves saved stock and price
+Order test double below checks routing only; Sara's real Order is pending.
+POST /purchase/2 -> 201 {"item": 2, "message": "Test Order double: no real purchase recorded", "order_id": 1}
+POST /purchase/3 -> 409 {"error": "Out of stock"}
+POST /purchase/999 -> 404 {"error": "Book not found"}
+POST /purchase/4 -> 502 {"error": "Backend returned an invalid JSON response"}
+GET /info/2 -> 200 {"id": 2, "price": 42.75, "quantity": 15, "title": "RPCs for Noobs.", "topic": "distributed systems"}
+GET /purchase/2 -> 405 {"error": "The method is not allowed for the requested URL."}
+GET /missing -> 404 {"error": "The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again."}
+GET /info/2 -> 503 {"error": "Backend service unavailable. A purchase outcome may be unknown; do not retry automatically."}
+POST /purchase/2 -> 503 {"error": "Backend service unavailable. A purchase outcome may be unknown; do not retry automatically."}
+PASS: all Catalog/Frontend checks; normal inventory unchanged.
