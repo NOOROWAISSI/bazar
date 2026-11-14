@@ -2,7 +2,8 @@
 
 Run on the host: python verify_docker.py
 Requires Docker Desktop/Linux containers and the Python requirements.
-Writes actual evidence to docs/docker-*. Normal application data is untouched.
+Writes detailed evidence to .verification and a summary to docs/output.txt.
+Normal application data is untouched.
 """
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
@@ -22,7 +23,7 @@ from urllib.request import Request, urlopen
 
 def main():
     project = Path(__file__).resolve().parent
-    docs = project / "docs"
+    docs = project / ".verification"
     docs.mkdir(exist_ok=True)
     sources = ("Dockerfile", ".dockerignore", "compose.yaml", "requirements.txt",
                "catalog.py", "order.py", "frontend.py")
@@ -132,6 +133,12 @@ def main():
                     time.sleep(.1)
     records.append("PASS: complete integration verified; disposable containers/volumes removed. Normal application data unchanged.")
     (docs / "docker-output.txt").write_text("\n\n".join(records) + "\n", encoding="utf-8")
+    selected = [line for line in "\n".join(logs).splitlines()
+                if "bought book" in line or "GET /search/" in line
+                or "GET /info/" in line or "POST /purchase/" in line][:35]
+    (project / "docs" / "output.txt").write_text(
+        "\n\n".join(records) + "\n\nService log excerpts:\n" + "\n".join(selected) + "\n",
+        encoding="utf-8")
     print(records[-1], flush=True)
 
 
