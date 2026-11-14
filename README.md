@@ -2,12 +2,12 @@
 
 Three Python microservices communicate over HTTP REST and JSON: Frontend routes user requests, Catalog owns books and inventory, and Order records purchases. SQLite persists catalog and order data separately. A host command-line client prints readable results and `bought book book_name` on success.
 
-The complete integrated project is on branch **noor**. Noor implemented Catalog/Frontend and the host client; Sara's Order service and tests are merged with their original commits preserved.
+The complete integrated project is delivered on **main**. Development work is preserved on **noor** and **sara**, with both contributors' original commits retained. Noor implemented Catalog/Frontend and the host client; Sara implemented Order and added Order/Client tests.
 
 ## Get the project
 
 ```powershell
-git clone --branch noor https://github.com/NOOROWAISSI/bazar.git
+git clone --branch main https://github.com/NOOROWAISSI/bazar.git
 cd bazar
 ```
 
@@ -119,4 +119,8 @@ Inspect live logs with `docker compose logs --no-color`. All services log HTTP m
 
 Catalog serializes stock writes, but decrementing stock and inserting an order are not one distributed transaction. Order attempts to restore stock when local order storage fails. Crashes, ambiguous network outcomes or failed compensation can still need reconciliation. There are no idempotency keys, authentication or payment/shipping workflows. These cases and possible improvements are explained in the report.
 
-Sara's latest six Client tests are integrated on noor. The combined regression suite contains 23 tests (3 Catalog, 14 Order and 6 Client). Contributor notes are preserved in [docs/contributions.md](docs/contributions.md).
+Sara's latest six Client tests are included in the integrated project. The combined regression suite contains 23 tests (3 Catalog, 14 Order and 6 Client). Contributor notes are preserved in [docs/contributions.md](docs/contributions.md).
+
+## Project guide
+
+The [in-repository Wiki](docs/wiki/README.md) links the setup guide, architecture, API references, tests and troubleshooting. It is versioned with the code and available directly after cloning.
