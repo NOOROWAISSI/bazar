@@ -6,40 +6,23 @@ $ docker compose up --build -d --wait --wait-timeout 120
 #1 DONE 0.1s
 
 #2 [frontend internal] load build definition from Dockerfile
-#2 transferring dockerfile:
-#2 transferring dockerfile: 432B 0.1s done
-#2 DONE 0.3s
+#2 transferring dockerfile: 507B 0.0s done
+#2 DONE 0.1s
 
-#3 [order internal] load metadata for docker.io/library/python:3.12-slim
-#3 DONE 1.9s
+#3 [frontend internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 1.7s
 
-#4 [frontend internal] load .dockerignore
-#4 transferring context: 202B done
-#4 DONE 0.1s
+#4 [order internal] load .dockerignore
+#4 transferring context: 277B done
+#4 DONE 0.0s
 
-#5 [order internal] load build context
+#5 [frontend 1/6] FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+#5 resolve docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b 0.0s done
 #5 DONE 0.0s
 
-#6 [order 1/6] FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
-#6 resolve docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b 0.1s done
-#6 resolve docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b 0.1s done
-#6 DONE 0.1s
-
-#5 [order internal] load build context
-#5 transferring context: 13.89kB 0.0s done
-#5 DONE 0.1s
-
-#7 [order 2/6] WORKDIR /app
-#7 CACHED
-
-#8 [order 3/6] COPY requirements.txt .
-#8 CACHED
-
-#9 [order 4/6] RUN pip install --no-cache-dir -r requirements.txt waitress==3.0.2
-#9 CACHED
-
-#10 [order 5/6] COPY catalog.py frontend.py order.py ./
-#10 ...
+#6 [frontend internal] load build context
+#6 transferring context: 13.89kB 0.0s done
+#6 DONE 0.0s
 
 #7 [frontend 2/6] WORKDIR /app
 #7 CACHED
@@ -51,96 +34,91 @@ $ docker compose up --build -d --wait --wait-timeout 120
 #9 CACHED
 
 #10 [frontend 5/6] COPY catalog.py frontend.py order.py ./
-#10 DONE 0.1s
+#10 CACHED
 
 #11 [frontend 6/6] RUN useradd --create-home app && mkdir -p /app/data /data && chown -R app:app /app/data /data
-#11 DONE 1.1s
+#11 CACHED
 
-#12 [order] exporting to image
-#12 exporting layers
-#12 exporting layers 0.4s done
-#12 exporting manifest sha256:e930770135458e9ca0dfebe80935442dea82b07adae0b068d40966e4017cebc2
-#12 exporting manifest sha256:e930770135458e9ca0dfebe80935442dea82b07adae0b068d40966e4017cebc2 0.2s done
-#12 exporting config sha256:9ac81a5bd9579110488e516f9fc0ed234c7a43e5c10efeeff7b03639cf8e458f
-#12 exporting config sha256:9ac81a5bd9579110488e516f9fc0ed234c7a43e5c10efeeff7b03639cf8e458f 0.1s done
-#12 exporting attestation manifest sha256:267822b51184b98631d2e35db64b628d741a7a220e6fc0dc06618b99f336deae
-#12 exporting attestation manifest sha256:267822b51184b98631d2e35db64b628d741a7a220e6fc0dc06618b99f336deae 0.2s done
-#12 exporting manifest list sha256:77d76c479316d3cde5a3f34e863ba46b89e5b7bfa11920e0af7442302003cec8 0.1s done
-#12 naming to docker.io/library/bazar-check-27575734-order:latest
-#12 naming to docker.io/library/bazar-check-27575734-order:latest 0.0s done
-#12 unpacking to docker.io/library/bazar-check-27575734-order:latest
-#12 unpacking to docker.io/library/bazar-check-27575734-order:latest 0.2s done
-#12 DONE 1.5s
+#12 [frontend] exporting to image
+#12 exporting layers done
+#12 exporting manifest sha256:f9629e0d82fefd359df7a2bd33d613cf274086d1ee70d566d010592af0a79343 0.0s done
+#12 exporting config sha256:44f7960129bb916b3de819f9404f092f39bbe0d5ff1be4983d4f6a2873a09fd1 0.1s done
+#12 exporting attestation manifest sha256:cf29796a7d093b683a3d49bdb6f1359b72b58d96942aefa427ec0a710f7a7aa3 0.1s done
+#12 exporting manifest list sha256:e5921a49906b987939cdaee5334215832ddeb1995968e6e99ab4ad552eb1831b
+#12 exporting manifest list sha256:e5921a49906b987939cdaee5334215832ddeb1995968e6e99ab4ad552eb1831b 0.0s done
+#12 naming to docker.io/library/bazar-check-92f636c5-frontend:latest 0.0s done
+#12 unpacking to docker.io/library/bazar-check-92f636c5-frontend:latest 0.0s done
+#12 DONE 0.4s
 
-#13 [catalog] exporting to image
-#13 exporting layers 0.4s done
-#13 exporting manifest sha256:0f529442071c952a3e1c21683b3ec80571d7ddcfa07729661d5d38c49e5c028c 0.2s done
-#13 exporting config sha256:472e06495926a58d7ac8f86b0d7ac1b1046fbf587c4961b8ec6e1943a9a05445 0.1s done
-#13 exporting attestation manifest sha256:35738f46c5ce3601ba254d27a6c4858d0f929ae5fdb3f0b47f27f1010aad5c4d 0.2s done
-#13 exporting manifest list sha256:ee3b4d947d0c9cc29f52406a2cf11ad46ef2b88c16f9003f844cb9cc99b1df91 0.1s done
-#13 naming to docker.io/library/bazar-check-27575734-catalog:latest 0.0s done
-#13 unpacking to docker.io/library/bazar-check-27575734-catalog:latest 0.2s done
-#13 DONE 1.4s
+#13 [order] exporting to image
+#13 exporting layers done
+#13 exporting manifest sha256:7fe1dd153f5e07bf29c3a9bf20148dd4a603959f4a0ea0fb898bcb3730835ce1 0.1s done
+#13 exporting config sha256:d9f8608418ae32673d5debe8b9ade1ef55c8afe3f51788dd85563f3fa23470ab 0.1s done
+#13 exporting attestation manifest sha256:3c9b9159b0fb6a57a5f743107cd49b290c08cc1964db4bb19153e68ddfe40336 0.1s done
+#13 exporting manifest list sha256:7a9a4cb5c9c6915cf1973317c60080ad52d5de73cff1269cc97cff5751724755 0.0s done
+#13 naming to docker.io/library/bazar-check-92f636c5-order:latest 0.0s done
+#13 unpacking to docker.io/library/bazar-check-92f636c5-order:latest 0.0s done
+#13 DONE 0.4s
 
-#14 [frontend] exporting to image
-#14 exporting layers 0.4s done
-#14 exporting manifest sha256:c10e58dceda87d8a6799ab0856519a6a14343c5427104d7b19ebdd18f72349a6 0.2s done
-#14 exporting config sha256:31bd96603b67ebb352cdd759bd5f864812ae5e3e8830c8579d2e9f9279e3d4cb 0.1s done
-#14 exporting attestation manifest sha256:845f5e68fcb074909504acdb55dfb4d1987ed7a2ad3568a942e438bdb5465fd0 0.2s done
-#14 exporting manifest list sha256:a346ea6a7e36ae8b65d8f9b2047a44cbd327a2dfe92a25d5937b425d651d2d90 0.1s done
-#14 naming to docker.io/library/bazar-check-27575734-frontend:latest 0.0s done
-#14 unpacking to docker.io/library/bazar-check-27575734-frontend:latest 0.2s done
-#14 DONE 1.4s
+#14 [catalog] exporting to image
+#14 exporting layers done
+#14 exporting manifest sha256:24d9c05e20fa5911e1dcb3e1be20f7420c2a2f27f27e37aab129e1b2a7747730 0.0s done
+#14 exporting config sha256:20d22985676cb36eefc35546fce4650aa2bbf47bbcb425656388a9dacebf0d9b 0.1s done
+#14 exporting attestation manifest sha256:2a9de7752a14a98bdaf42d41b8c2b14ed90d79965b556038df64bb589f09b3bd 0.1s done
+#14 exporting manifest list sha256:6ccf21145d0159c5c6ac6bd779a8ed202d3b007dae3256b04c4d88af58fc86ce 0.0s done
+#14 naming to docker.io/library/bazar-check-92f636c5-catalog:latest done
+#14 unpacking to docker.io/library/bazar-check-92f636c5-catalog:latest 0.0s done
+#14 DONE 0.4s
 
-#15 [catalog] resolving provenance for metadata file
-#15 DONE 0.2s
+#15 [frontend] resolving provenance for metadata file
+#15 DONE 0.1s
 
-#16 [frontend] resolving provenance for metadata file
+#16 [catalog] resolving provenance for metadata file
 #16 DONE 0.1s
 
 #17 [order] resolving provenance for metadata file
 #17 DONE 0.0s
- Image bazar-check-27575734-frontend Building 
- Image bazar-check-27575734-catalog Building 
- Image bazar-check-27575734-order Building 
- Image bazar-check-27575734-catalog Built 
- Image bazar-check-27575734-order Built 
- Image bazar-check-27575734-frontend Built 
- Network bazar-check-27575734_default Creating 
- Network bazar-check-27575734_default Created 
- Volume bazar-check-27575734_catalog-data Creating 
- Volume bazar-check-27575734_catalog-data Created 
- Volume bazar-check-27575734_order-data Creating 
- Volume bazar-check-27575734_order-data Created 
- Container bazar-check-27575734-catalog-1 Creating 
- Container bazar-check-27575734-catalog-1 Created 
- Container bazar-check-27575734-order-1 Creating 
- Container bazar-check-27575734-order-1 Created 
- Container bazar-check-27575734-frontend-1 Creating 
- Container bazar-check-27575734-frontend-1 Created 
- Container bazar-check-27575734-catalog-1 Starting 
- Container bazar-check-27575734-catalog-1 Started 
- Container bazar-check-27575734-catalog-1 Waiting 
- Container bazar-check-27575734-catalog-1 Healthy 
- Container bazar-check-27575734-order-1 Starting 
- Container bazar-check-27575734-order-1 Started 
- Container bazar-check-27575734-catalog-1 Waiting 
- Container bazar-check-27575734-order-1 Waiting 
- Container bazar-check-27575734-catalog-1 Healthy 
- Container bazar-check-27575734-order-1 Healthy 
- Container bazar-check-27575734-frontend-1 Starting 
- Container bazar-check-27575734-frontend-1 Started 
- Container bazar-check-27575734-order-1 Waiting 
- Container bazar-check-27575734-frontend-1 Waiting 
- Container bazar-check-27575734-catalog-1 Waiting 
- Container bazar-check-27575734-order-1 Healthy 
- Container bazar-check-27575734-catalog-1 Healthy 
- Container bazar-check-27575734-frontend-1 Healthy 
+ Image bazar-check-92f636c5-frontend Building
+ Image bazar-check-92f636c5-catalog Building
+ Image bazar-check-92f636c5-order Building
+ Image bazar-check-92f636c5-catalog Built
+ Image bazar-check-92f636c5-order Built
+ Image bazar-check-92f636c5-frontend Built
+ Network bazar-check-92f636c5_default Creating
+ Network bazar-check-92f636c5_default Created
+ Volume bazar-check-92f636c5_catalog-data Creating
+ Volume bazar-check-92f636c5_catalog-data Created
+ Volume bazar-check-92f636c5_order-data Creating
+ Volume bazar-check-92f636c5_order-data Created
+ Container bazar-check-92f636c5-catalog-1 Creating
+ Container bazar-check-92f636c5-catalog-1 Created
+ Container bazar-check-92f636c5-order-1 Creating
+ Container bazar-check-92f636c5-order-1 Created
+ Container bazar-check-92f636c5-frontend-1 Creating
+ Container bazar-check-92f636c5-frontend-1 Created
+ Container bazar-check-92f636c5-catalog-1 Starting
+ Container bazar-check-92f636c5-catalog-1 Started
+ Container bazar-check-92f636c5-catalog-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Healthy
+ Container bazar-check-92f636c5-order-1 Starting
+ Container bazar-check-92f636c5-order-1 Started
+ Container bazar-check-92f636c5-catalog-1 Waiting
+ Container bazar-check-92f636c5-order-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Healthy
+ Container bazar-check-92f636c5-order-1 Healthy
+ Container bazar-check-92f636c5-frontend-1 Starting
+ Container bazar-check-92f636c5-frontend-1 Started
+ Container bazar-check-92f636c5-order-1 Waiting
+ Container bazar-check-92f636c5-frontend-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Waiting
+ Container bazar-check-92f636c5-order-1 Healthy
+ Container bazar-check-92f636c5-catalog-1 Healthy
+ Container bazar-check-92f636c5-frontend-1 Healthy
 
 $ docker compose ps --format json
-{"Command":"\"waitress-serve --liâ€¦\"","CreatedAt":"2026-11-11 02:21:40 +0200 EET","ExitCode":0,"Health":"healthy","ID":"42d2557239f4","Image":"bazar-check-27575734-catalog","Labels":"com.docker.compose.config-hash=4edac3644a886d83706bf67e89ee77c2c768c8fc7714792f8b0352270e7c63c8,com.docker.compose.depends_on=,com.docker.compose.project=bazar-check-27575734,com.docker.compose.project.config_files=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-s9of1rri\\compose.yaml,com.docker.compose.project.working_dir=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-s9of1rri,com.docker.compose.service=catalog,com.docker.compose.version=5.0.2,desktop.docker.io/ports.scheme=v2,com.docker.compose.container-number=1,com.docker.compose.image=sha256:ee3b4d947d0c9cc29f52406a2cf11ad46ef2b88c16f9003f844cb9cc99b1df91,com.docker.compose.oneoff=False","LocalVolumes":"1","Mounts":"bazar-check-27â€¦","Name":"bazar-check-27575734-catalog-1","Names":"bazar-check-27575734-catalog-1","Networks":"bazar-check-27575734_default","Ports":"","Project":"bazar-check-27575734","Publishers":[],"RunningFor":"18 seconds ago","Service":"catalog","Size":"0B","State":"running","Status":"Up 17 seconds (healthy)"}
-{"Command":"\"waitress-serve --liâ€¦\"","CreatedAt":"2026-11-11 02:21:40 +0200 EET","ExitCode":0,"Health":"healthy","ID":"b24317e1c8ac","Image":"bazar-check-27575734-frontend","Labels":"com.docker.compose.config-hash=3873f4cd36fd1c517e4b5a2159c2789b73fe00bafa1dff24db8244c6147966fa,com.docker.compose.image=sha256:a346ea6a7e36ae8b65d8f9b2047a44cbd327a2dfe92a25d5937b425d651d2d90,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-s9of1rri\\compose.yaml,com.docker.compose.project.working_dir=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-s9of1rri,com.docker.compose.service=frontend,desktop.docker.io/ports.scheme=v2,com.docker.compose.container-number=1,com.docker.compose.depends_on=catalog:service_healthy:false,order:service_healthy:false,com.docker.compose.project=bazar-check-27575734,com.docker.compose.version=5.0.2,desktop.docker.io/ports/5000/tcp=127.0.0.1:62905","LocalVolumes":"0","Mounts":"","Name":"bazar-check-27575734-frontend-1","Names":"bazar-check-27575734-frontend-1","Networks":"bazar-check-27575734_default","Ports":"127.0.0.1:62905-\u003e5000/tcp","Project":"bazar-check-27575734","Publishers":[{"URL":"127.0.0.1","TargetPort":5000,"PublishedPort":62905,"Protocol":"tcp"}],"RunningFor":"18 seconds ago","Service":"frontend","Size":"0B","State":"running","Status":"Up 6 seconds (healthy)"}
-{"Command":"\"waitress-serve --liâ€¦\"","CreatedAt":"2026-11-11 02:21:40 +0200 EET","ExitCode":0,"Health":"healthy","ID":"3f72cc979475","Image":"bazar-check-27575734-order","Labels":"com.docker.compose.image=sha256:77d76c479316d3cde5a3f34e863ba46b89e5b7bfa11920e0af7442302003cec8,com.docker.compose.project.config_files=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-s9of1rri\\compose.yaml,com.docker.compose.project.working_dir=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-s9of1rri,com.docker.compose.version=5.0.2,desktop.docker.io/ports.scheme=v2,com.docker.compose.container-number=1,com.docker.compose.oneoff=False,com.docker.compose.project=bazar-check-27575734,com.docker.compose.service=order,com.docker.compose.config-hash=bb7045506ece18dc4debc5c23b693fd30236279fecba008f2f3725026921aff9,com.docker.compose.depends_on=catalog:service_healthy:false","LocalVolumes":"1","Mounts":"bazar-check-27â€¦","Name":"bazar-check-27575734-order-1","Names":"bazar-check-27575734-order-1","Networks":"bazar-check-27575734_default","Ports":"","Project":"bazar-check-27575734","Publishers":[],"RunningFor":"18 seconds ago","Service":"order","Size":"0B","State":"running","Status":"Up 11 seconds (healthy)"}
+{"Command":"\"waitress-serve --liâ€¦\"","CreatedAt":"2026-11-14 17:51:39 +0200 EET","ExitCode":0,"Health":"healthy","ID":"ee26d0a98947","Image":"bazar-check-92f636c5-catalog","Labels":"desktop.docker.io/ports.scheme=v2,com.docker.compose.depends_on=,com.docker.compose.oneoff=False,com.docker.compose.project=bazar-check-92f636c5,com.docker.compose.project.config_files=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-9qfav4_r\\compose.yaml,com.docker.compose.version=5.0.2,com.docker.compose.config-hash=4edac3644a886d83706bf67e89ee77c2c768c8fc7714792f8b0352270e7c63c8,com.docker.compose.container-number=1,com.docker.compose.image=sha256:6ccf21145d0159c5c6ac6bd779a8ed202d3b007dae3256b04c4d88af58fc86ce,com.docker.compose.project.working_dir=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-9qfav4_r,com.docker.compose.service=catalog","LocalVolumes":"1","Mounts":"bazar-check-92â€¦","Name":"bazar-check-92f636c5-catalog-1","Names":"bazar-check-92f636c5-catalog-1","Networks":"bazar-check-92f636c5_default","Ports":"","Project":"bazar-check-92f636c5","Publishers":[],"RunningFor":"19 seconds ago","Service":"catalog","Size":"0B","State":"running","Status":"Up 18 seconds (healthy)"}
+{"Command":"\"waitress-serve --liâ€¦\"","CreatedAt":"2026-11-14 17:51:39 +0200 EET","ExitCode":0,"Health":"healthy","ID":"d952af7b857c","Image":"bazar-check-92f636c5-frontend","Labels":"com.docker.compose.project=bazar-check-92f636c5,com.docker.compose.service=frontend,desktop.docker.io/ports/5000/tcp=127.0.0.1:55699,com.docker.compose.config-hash=4047b319d99891585575712ec48a45435aec1f9d6b8c78ab3099254a21326c86,com.docker.compose.container-number=1,com.docker.compose.image=sha256:e5921a49906b987939cdaee5334215832ddeb1995968e6e99ab4ad552eb1831b,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-9qfav4_r\\compose.yaml,com.docker.compose.project.working_dir=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-9qfav4_r,com.docker.compose.version=5.0.2,desktop.docker.io/ports.scheme=v2,com.docker.compose.depends_on=catalog:service_healthy:false,order:service_healthy:false","LocalVolumes":"0","Mounts":"","Name":"bazar-check-92f636c5-frontend-1","Names":"bazar-check-92f636c5-frontend-1","Networks":"bazar-check-92f636c5_default","Ports":"127.0.0.1:55699-\u003e5000/tcp","Project":"bazar-check-92f636c5","Publishers":[{"URL":"127.0.0.1","TargetPort":5000,"PublishedPort":55699,"Protocol":"tcp"}],"RunningFor":"19 seconds ago","Service":"frontend","Size":"0B","State":"running","Status":"Up 6 seconds (healthy)"}
+{"Command":"\"waitress-serve --liâ€¦\"","CreatedAt":"2026-11-14 17:51:39 +0200 EET","ExitCode":0,"Health":"healthy","ID":"d0e51cb4c5d3","Image":"bazar-check-92f636c5-order","Labels":"com.docker.compose.project.working_dir=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-9qfav4_r,com.docker.compose.service=order,com.docker.compose.version=5.0.2,com.docker.compose.config-hash=bb7045506ece18dc4debc5c23b693fd30236279fecba008f2f3725026921aff9,com.docker.compose.container-number=1,com.docker.compose.image=sha256:7a9a4cb5c9c6915cf1973317c60080ad52d5de73cff1269cc97cff5751724755,desktop.docker.io/ports.scheme=v2,com.docker.compose.depends_on=catalog:service_healthy:false,com.docker.compose.oneoff=False,com.docker.compose.project=bazar-check-92f636c5,com.docker.compose.project.config_files=C:\\Users\\noorf\\AppData\\Local\\Temp\\bazar-docker-check-9qfav4_r\\compose.yaml","LocalVolumes":"1","Mounts":"bazar-check-92â€¦","Name":"bazar-check-92f636c5-order-1","Names":"bazar-check-92f636c5-order-1","Networks":"bazar-check-92f636c5_default","Ports":"","Project":"bazar-check-92f636c5","Publishers":[],"RunningFor":"19 seconds ago","Service":"order","Size":"0B","State":"running","Status":"Up 12 seconds (healthy)"}
 
 $ docker compose exec -T order python -c import sqlite3; db=sqlite3.connect('/data/orders.db'); print(db.execute('SELECT COUNT(*) FROM orders').fetchone()[0]); db.close()
 11
@@ -149,396 +127,403 @@ $ docker compose logs --no-color
 order-1     | INFO:waitress:Serving on http://0.0.0.0:5002
 catalog-1   | INFO:waitress:Serving on http://0.0.0.0:5001
 frontend-1  | INFO:waitress:Serving on http://0.0.0.0:5000
-order-1     | [2026-11-11 00:21:52,556] INFO in order: GET /health -> 200
+order-1     | [2026-11-14 15:51:51,722] INFO in order: GET /health -> 200
+catalog-1   | [2026-11-14 15:51:45,852] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:51:48,313] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+frontend-1  | [2026-11-14 15:51:57,767] INFO in frontend: GET /info/2 -> 200
+catalog-1   | [2026-11-14 15:51:50,726] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
 order-1     | INFO:order:GET /health -> 200
-order-1     | [2026-11-11 00:21:54,909] INFO in order: GET /health -> 200
+catalog-1   | [2026-11-14 15:51:53,169] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:51:55,625] INFO in catalog: GET /query/item/1 -> 200
+order-1     | [2026-11-14 15:51:54,087] INFO in order: GET /health -> 200
 order-1     | INFO:order:GET /health -> 200
-order-1     | [2026-11-11 00:21:57,229] INFO in order: GET /health -> 200
-order-1     | INFO:order:GET /health -> 200
-frontend-1  | [2026-11-11 00:21:58,509] INFO in frontend: GET /info/2 -> 200
+order-1     | [2026-11-14 15:51:56,537] INFO in order: GET /health -> 200
 frontend-1  | INFO:frontend:GET /info/2 -> 200
-frontend-1  | [2026-11-11 00:21:59,168] INFO in frontend: GET /search/distributed systems -> 200
+order-1     | INFO:order:GET /health -> 200
+order-1     | [2026-11-14 15:51:58,953] INFO in order: GET /health -> 200
+order-1     | INFO:order:GET /health -> 200
+frontend-1  | [2026-11-14 15:51:58,829] INFO in frontend: GET /search/distributed systems -> 200
+order-1     | [2026-11-14 15:51:59,628] INFO in order: bought book RPCs for Noobs.
 frontend-1  | INFO:frontend:GET /search/distributed systems -> 200
-catalog-1   | [2026-11-11 00:21:46,725] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:21:49,053] INFO in catalog: GET /query/item/1 -> 200
-order-1     | [2026-11-11 00:21:59,555] INFO in order: GET /health -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:21:51,397] INFO in catalog: GET /query/item/1 -> 200
-frontend-1  | [2026-11-11 00:21:59,362] INFO in frontend: GET /search/undergraduate school -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:21:53,756] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:21:56,224] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+frontend-1  | [2026-11-14 15:51:59,091] INFO in frontend: GET /search/undergraduate school -> 200
 frontend-1  | INFO:frontend:GET /search/undergraduate school -> 200
-frontend-1  | [2026-11-11 00:21:59,548] INFO in frontend: GET /info/2 -> 200
-frontend-1  | INFO:frontend:GET /info/2 -> 200
-order-1     | INFO:order:GET /health -> 200
-order-1     | [2026-11-11 00:21:59,783] INFO in order: bought book RPCs for Noobs.
-order-1     | INFO:order:bought book RPCs for Noobs.
-frontend-1  | [2026-11-11 00:21:59,784] INFO in frontend: POST /purchase/2 -> 201
-frontend-1  | INFO:frontend:POST /purchase/2 -> 201
-frontend-1  | [2026-11-11 00:21:59,975] INFO in frontend: GET /info/2 -> 200
-frontend-1  | INFO:frontend:GET /info/2 -> 200
-order-1     | [2026-11-11 00:21:59,784] INFO in order: POST /purchase/2 -> 201
-order-1     | INFO:order:POST /purchase/2 -> 201
-order-1     | [2026-11-11 00:22:00,000] INFO in order: POST /purchase/999 -> 404
-order-1     | INFO:order:POST /purchase/999 -> 404
-order-1     | [2026-11-11 00:22:00,066] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | [2026-11-11 00:22:00,066] INFO in order: POST /purchase/1 -> 201
-order-1     | INFO:order:POST /purchase/1 -> 201
-order-1     | [2026-11-11 00:22:00,099] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
-catalog-1   | [2026-11-11 00:21:58,508] INFO in catalog: GET /query/item/2 -> 200
-order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | [2026-11-11 00:22:00,100] INFO in order: POST /purchase/1 -> 201
-order-1     | INFO:order:POST /purchase/1 -> 201
-order-1     | [2026-11-11 00:22:00,131] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
-catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-catalog-1   | [2026-11-11 00:21:58,580] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-frontend-1  | [2026-11-11 00:22:00,001] INFO in frontend: POST /purchase/999 -> 404
+catalog-1   | [2026-11-14 15:51:57,764] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:51:58,191] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:51:58,828] INFO in catalog: GET /query/topic/distributed systems -> 200
+frontend-1  | [2026-11-14 15:51:59,355] INFO in frontend: GET /info/2 -> 200
+order-1     | INFO:order:bought book RPCs for Noobs.
+frontend-1  | INFO:frontend:GET /info/2 -> 200
+frontend-1  | [2026-11-14 15:51:59,630] INFO in frontend: POST /purchase/2 -> 201
+order-1     | [2026-11-14 15:51:59,629] INFO in order: POST /purchase/2 -> 201
+order-1     | INFO:order:POST /purchase/2 -> 201
+order-1     | [2026-11-14 15:52:00,036] INFO in order: POST /purchase/999 -> 404
+order-1     | INFO:order:POST /purchase/999 -> 404
+catalog-1   | INFO:catalog:GET /query/topic/distributed systems -> 200
+catalog-1   | [2026-11-14 15:51:59,090] INFO in catalog: GET /query/topic/undergraduate school -> 200
+catalog-1   | INFO:catalog:GET /query/topic/undergraduate school -> 200
+catalog-1   | [2026-11-14 15:51:59,354] INFO in catalog: GET /query/item/2 -> 200
+order-1     | [2026-11-14 15:52:00,104] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | [2026-11-14 15:52:00,105] INFO in order: POST /purchase/1 -> 201
+order-1     | INFO:order:POST /purchase/1 -> 201
+frontend-1  | INFO:frontend:POST /purchase/2 -> 201
+frontend-1  | [2026-11-14 15:51:59,968] INFO in frontend: GET /info/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+order-1     | [2026-11-14 15:52:00,118] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | [2026-11-14 15:52:00,120] INFO in order: POST /purchase/1 -> 201
+order-1     | INFO:order:POST /purchase/1 -> 201
+order-1     | [2026-11-14 15:52:00,130] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+frontend-1  | INFO:frontend:GET /info/2 -> 200
+frontend-1  | [2026-11-14 15:52:00,038] INFO in frontend: POST /purchase/999 -> 404
 frontend-1  | INFO:frontend:POST /purchase/999 -> 404
 frontend-1  | WARNING:waitress.queue:Task queue depth is 1
+catalog-1   | [2026-11-14 15:51:59,609] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:51:59,620] INFO in catalog: PATCH /update/2 -> 200
+catalog-1   | INFO:catalog:PATCH /update/2 -> 200
+catalog-1   | [2026-11-14 15:51:59,967] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:00,034] INFO in catalog: GET /query/item/999 -> 404
+catalog-1   | INFO:catalog:GET /query/item/999 -> 404
+catalog-1   | [2026-11-14 15:52:00,066] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,069] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
 order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-catalog-1   | [2026-11-11 00:21:59,167] INFO in catalog: GET /query/topic/distributed systems -> 200
-catalog-1   | INFO:catalog:GET /query/topic/distributed systems -> 200
-catalog-1   | [2026-11-11 00:21:59,361] INFO in catalog: GET /query/topic/undergraduate school -> 200
-catalog-1   | INFO:catalog:GET /query/topic/undergraduate school -> 200
-catalog-1   | [2026-11-11 00:21:59,547] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:00,070] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,070] INFO in catalog: GET /query/item/1 -> 200
 frontend-1  | WARNING:waitress.queue:Task queue depth is 2
-catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-order-1     | [2026-11-11 00:22:00,132] INFO in order: POST /purchase/1 -> 201
-order-1     | INFO:order:POST /purchase/1 -> 201
-order-1     | [2026-11-11 00:22:00,165] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-catalog-1   | [2026-11-11 00:21:59,755] INFO in catalog: GET /query/item/2 -> 200
-catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-catalog-1   | [2026-11-11 00:21:59,771] INFO in catalog: PATCH /update/2 -> 200
 frontend-1  | WARNING:waitress.queue:Task queue depth is 3
 frontend-1  | WARNING:waitress.queue:Task queue depth is 4
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,092] INFO in catalog: PATCH /update/1 -> 200
 frontend-1  | WARNING:waitress.queue:Task queue depth is 5
+catalog-1   | INFO:catalog:PATCH /update/1 -> 200
+order-1     | [2026-11-14 15:52:00,133] INFO in order: POST /purchase/1 -> 201
 frontend-1  | WARNING:waitress.queue:Task queue depth is 6
-catalog-1   | INFO:catalog:PATCH /update/2 -> 200
-order-1     | [2026-11-11 00:22:00,166] INFO in order: POST /purchase/1 -> 201
 order-1     | INFO:order:POST /purchase/1 -> 201
+order-1     | [2026-11-14 15:52:00,149] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
 frontend-1  | WARNING:waitress.queue:Task queue depth is 7
+order-1     | [2026-11-14 15:52:00,150] INFO in order: POST /purchase/1 -> 201
+order-1     | INFO:order:POST /purchase/1 -> 201
 frontend-1  | WARNING:waitress.queue:Task queue depth is 8
 frontend-1  | WARNING:waitress.queue:Task queue depth is 9
 frontend-1  | WARNING:waitress.queue:Task queue depth is 10
 frontend-1  | WARNING:waitress.queue:Task queue depth is 11
-order-1     | [2026-11-11 00:22:00,200] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+catalog-1   | [2026-11-14 15:52:00,101] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | INFO:catalog:PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,112] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | INFO:catalog:PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,115] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,128] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | INFO:catalog:PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,130] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,140] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | INFO:catalog:PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,144] INFO in catalog: GET /query/item/1 -> 200
+order-1     | [2026-11-14 15:52:00,160] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
 order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | [2026-11-11 00:22:00,201] INFO in order: POST /purchase/1 -> 201
-order-1     | INFO:order:POST /purchase/1 -> 201
-order-1     | [2026-11-11 00:22:00,227] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | [2026-11-11 00:22:00,227] INFO in order: POST /purchase/1 -> 201
-order-1     | INFO:order:POST /purchase/1 -> 201
-order-1     | [2026-11-11 00:22:00,256] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
-catalog-1   | [2026-11-11 00:21:59,974] INFO in catalog: GET /query/item/2 -> 200
-catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-catalog-1   | [2026-11-11 00:21:59,999] INFO in catalog: GET /query/item/999 -> 404
-catalog-1   | INFO:catalog:GET /query/item/999 -> 404
-catalog-1   | [2026-11-11 00:22:00,019] INFO in catalog: GET /query/item/1 -> 200
 frontend-1  | WARNING:waitress.queue:Task queue depth is 12
 frontend-1  | WARNING:waitress.queue:Task queue depth is 13
+order-1     | [2026-11-14 15:52:00,163] INFO in order: POST /purchase/1 -> 201
 frontend-1  | WARNING:waitress.queue:Task queue depth is 14
+order-1     | INFO:order:POST /purchase/1 -> 201
+order-1     | [2026-11-14 15:52:00,173] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | [2026-11-14 15:52:00,174] INFO in order: POST /purchase/1 -> 201
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+order-1     | INFO:order:POST /purchase/1 -> 201
 frontend-1  | WARNING:waitress.queue:Task queue depth is 15
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,021] INFO in catalog: GET /query/item/1 -> 200
 frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-frontend-1  | [2026-11-11 00:22:00,067] INFO in frontend: POST /purchase/1 -> 201
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,158] INFO in catalog: PATCH /update/1 -> 200
+frontend-1  | [2026-11-14 15:52:00,107] INFO in frontend: POST /purchase/1 -> 201
 frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | [2026-11-11 00:22:00,256] INFO in order: POST /purchase/1 -> 201
-frontend-1  | [2026-11-11 00:22:00,100] INFO in frontend: POST /purchase/1 -> 201
-frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-frontend-1  | [2026-11-11 00:22:00,133] INFO in frontend: POST /purchase/1 -> 201
-frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-catalog-1   | [2026-11-11 00:22:00,022] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,022] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,044] INFO in catalog: PATCH /update/1 -> 200
-order-1     | INFO:order:POST /purchase/1 -> 201
-catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,074] INFO in catalog: PATCH /update/1 -> 200
-catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,080] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-order-1     | [2026-11-11 00:22:00,289] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-frontend-1  | [2026-11-11 00:22:00,167] INFO in frontend: POST /purchase/1 -> 201
-order-1     | [2026-11-11 00:22:00,289] INFO in order: POST /purchase/1 -> 201
-order-1     | INFO:order:POST /purchase/1 -> 201
-order-1     | [2026-11-11 00:22:00,321] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+frontend-1  | [2026-11-14 15:52:00,121] INFO in frontend: POST /purchase/1 -> 201
+order-1     | [2026-11-14 15:52:00,192] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
 order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
 frontend-1  | INFO:frontend:POST /purchase/1 -> 201
+frontend-1  | WARNING:waitress.queue:Task queue depth is 15
 frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-frontend-1  | [2026-11-11 00:22:00,202] INFO in frontend: POST /purchase/1 -> 201
-frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-frontend-1  | [2026-11-11 00:22:00,228] INFO in frontend: POST /purchase/1 -> 201
-catalog-1   | [2026-11-11 00:22:00,110] INFO in catalog: PATCH /update/1 -> 200
+frontend-1  | [2026-11-14 15:52:00,134] INFO in frontend: POST /purchase/1 -> 201
 catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,113] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,160] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,141] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,175] INFO in catalog: PATCH /update/1 -> 200
 catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,141] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,175] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,180] INFO in catalog: GET /query/item/1 -> 200
 frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-frontend-1  | [2026-11-11 00:22:00,257] INFO in frontend: POST /purchase/1 -> 201
-order-1     | [2026-11-11 00:22:00,322] INFO in order: POST /purchase/1 -> 201
-frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-frontend-1  | [2026-11-11 00:22:00,290] INFO in frontend: POST /purchase/1 -> 201
-frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-frontend-1  | [2026-11-11 00:22:00,322] INFO in frontend: POST /purchase/1 -> 201
-frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-frontend-1  | WARNING:waitress.queue:Task queue depth is 16
-frontend-1  | [2026-11-11 00:22:00,332] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | WARNING:waitress.queue:Task queue depth is 16
+order-1     | [2026-11-14 15:52:00,193] INFO in order: POST /purchase/1 -> 201
 order-1     | INFO:order:POST /purchase/1 -> 201
-order-1     | [2026-11-11 00:22:00,331] INFO in order: POST /purchase/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,175] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-frontend-1  | [2026-11-11 00:22:00,340] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,345] INFO in frontend: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,339] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,202] INFO in catalog: PATCH /update/1 -> 200
-catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-order-1     | [2026-11-11 00:22:00,345] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,347] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,349] INFO in frontend: POST /purchase/1 -> 201
+frontend-1  | WARNING:waitress.queue:Task queue depth is 16
+frontend-1  | [2026-11-14 15:52:00,151] INFO in frontend: POST /purchase/1 -> 201
 frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-catalog-1   | [2026-11-11 00:22:00,209] INFO in catalog: GET /query/item/1 -> 200
-frontend-1  | [2026-11-11 00:22:00,354] INFO in frontend: POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,220] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
 order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-catalog-1   | [2026-11-11 00:22:00,233] INFO in catalog: PATCH /update/1 -> 200
-order-1     | [2026-11-11 00:22:00,348] INFO in order: POST /purchase/1 -> 201
-frontend-1  | [2026-11-11 00:22:00,361] INFO in frontend: POST /purchase/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,196] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | INFO:catalog:PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,202] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,209] INFO in catalog: GET /query/item/1 -> 200
+order-1     | [2026-11-14 15:52:00,222] INFO in order: POST /purchase/1 -> 201
 order-1     | INFO:order:POST /purchase/1 -> 201
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,234] INFO in catalog: GET /query/item/1 -> 200
+order-1     | [2026-11-14 15:52:00,244] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,261] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,223] INFO in catalog: PATCH /update/1 -> 200
+frontend-1  | WARNING:waitress.queue:Task queue depth is 16
+frontend-1  | [2026-11-14 15:52:00,165] INFO in frontend: POST /purchase/1 -> 201
 catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-frontend-1  | [2026-11-11 00:22:00,362] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,369] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,370] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,378] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,385] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,389] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,352] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,358] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,361] INFO in order: POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,394] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,262] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,294] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,242] INFO in catalog: PATCH /update/1 -> 200
 catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-frontend-1  | [2026-11-11 00:22:00,396] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,368] INFO in order: POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,402] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,409] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,417] INFO in frontend: POST /purchase/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,295] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,248] INFO in catalog: GET /query/item/1 -> 200
+frontend-1  | INFO:frontend:POST /purchase/1 -> 201
+order-1     | [2026-11-14 15:52:00,245] INFO in order: POST /purchase/1 -> 201
+order-1     | INFO:order:POST /purchase/1 -> 201
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,326] INFO in catalog: PATCH /update/1 -> 200
-catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,327] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,330] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,251] INFO in catalog: PATCH /update/1 -> 409
 catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,336] INFO in catalog: GET /query/item/1 -> 200
+order-1     | [2026-11-14 15:52:00,255] INFO in order: POST /purchase/1 -> 409
 order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,260] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | [2026-11-14 15:52:00,260] INFO in order: POST /purchase/1 -> 409
+frontend-1  | WARNING:waitress.queue:Task queue depth is 16
+catalog-1   | [2026-11-14 15:52:00,257] INFO in catalog: PATCH /update/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,177] INFO in frontend: POST /purchase/1 -> 201
+frontend-1  | INFO:frontend:POST /purchase/1 -> 201
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,265] INFO in catalog: GET /query/item/1 -> 200
+frontend-1  | WARNING:waitress.queue:Task queue depth is 16
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+frontend-1  | [2026-11-14 15:52:00,194] INFO in frontend: POST /purchase/1 -> 201
+frontend-1  | INFO:frontend:POST /purchase/1 -> 201
+frontend-1  | WARNING:waitress.queue:Task queue depth is 16
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,262] INFO in order: POST /purchase/1 -> 201
+order-1     | INFO:order:POST /purchase/1 -> 201
+catalog-1   | [2026-11-14 15:52:00,272] INFO in catalog: GET /query/item/1 -> 200
+order-1     | [2026-11-14 15:52:00,287] INFO in order: POST /purchase/1 -> 409
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+frontend-1  | [2026-11-14 15:52:00,223] INFO in frontend: POST /purchase/1 -> 201
+catalog-1   | [2026-11-14 15:52:00,280] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,281] INFO in catalog: GET /query/item/1 -> 200
+frontend-1  | INFO:frontend:POST /purchase/1 -> 201
+frontend-1  | WARNING:waitress.queue:Task queue depth is 16
+frontend-1  | [2026-11-14 15:52:00,247] INFO in frontend: POST /purchase/1 -> 201
+order-1     | INFO:order:POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 201
+frontend-1  | [2026-11-14 15:52:00,257] INFO in frontend: POST /purchase/1 -> 409
 frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,368] INFO in order: POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,418] INFO in frontend: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,376] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,384] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,388] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,392] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,394] INFO in order: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,423] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,428] INFO in frontend: POST /purchase/1 -> 409
-frontend-1  | INFO:frontend:POST /purchase/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,430] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,262] INFO in frontend: POST /purchase/1 -> 409
 frontend-1  | INFO:frontend:POST /purchase/1 -> 409
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,339] INFO in catalog: PATCH /update/1 -> 409
-frontend-1  | [2026-11-11 00:22:00,437] INFO in frontend: GET /info/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,282] INFO in catalog: PATCH /update/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,263] INFO in frontend: POST /purchase/1 -> 201
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+order-1     | [2026-11-14 15:52:00,288] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,293] INFO in order: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 201
+frontend-1  | WARNING:waitress.queue:Task queue depth is 13
+frontend-1  | WARNING:waitress.queue:Task queue depth is 14
+catalog-1   | [2026-11-14 15:52:00,283] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,291] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,292] INFO in catalog: PATCH /update/1 -> 409
+order-1     | [2026-11-14 15:52:00,297] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | WARNING:waitress.queue:Task queue depth is 1
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,305] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,307] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,310] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+frontend-1  | [2026-11-14 15:52:00,289] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,322] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,323] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,326] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,329] INFO in order: POST /purchase/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,317] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,319] INFO in catalog: PATCH /update/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,348] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,351] INFO in order: POST /purchase/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,291] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,296] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,302] INFO in frontend: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,354] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,320] INFO in catalog: PATCH /update/1 -> 409
+order-1     | [2026-11-14 15:52:00,358] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,377] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,324] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,326] INFO in frontend: POST /purchase/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,323] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,328] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,383] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,332] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,389] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,391] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,407] INFO in order: POST /purchase/1 -> 409
+order-1     | INFO:order:POST /purchase/1 -> 409
+order-1     | [2026-11-14 15:52:00,409] INFO in order: POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,351] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,352] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,358] INFO in frontend: POST /purchase/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,326] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,338] INFO in catalog: GET /query/item/1 -> 200
+order-1     | INFO:order:POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,339] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,342] INFO in catalog: GET /query/item/1 -> 200
+frontend-1  | [2026-11-14 15:52:00,360] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,382] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,387] INFO in frontend: POST /purchase/1 -> 409
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,394] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,395] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,410] INFO in frontend: POST /purchase/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,343] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,346] INFO in catalog: PATCH /update/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,417] INFO in frontend: POST /purchase/1 -> 409
+frontend-1  | INFO:frontend:POST /purchase/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,445] INFO in frontend: GET /info/1 -> 200
 frontend-1  | INFO:frontend:GET /info/1 -> 200
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,400] INFO in order: POST /purchase/1 -> 409
+frontend-1  | [2026-11-14 15:52:00,518] INFO in frontend: GET /info/2 -> 200
+frontend-1  | INFO:frontend:GET /info/2 -> 200
+catalog-1   | [2026-11-14 15:52:00,348] INFO in catalog: PATCH /update/1 -> 409
 catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,408] INFO in order: POST /purchase/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,343] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,352] INFO in catalog: PATCH /update/1 -> 409
 catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,345] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,353] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,361] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,350] INFO in catalog: PATCH /update/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,350] INFO in catalog: GET /query/item/1 -> 200
-order-1     | [2026-11-11 00:22:00,415] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,416] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,421] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,427] INFO in order: POST /purchase/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,366] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,357] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,375] INFO in catalog: PATCH /update/1 -> 409
 catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,357] INFO in catalog: GET /query/item/1 -> 200
-order-1     | INFO:order:POST /purchase/1 -> 409
-order-1     | [2026-11-11 00:22:00,429] INFO in order: POST /purchase/1 -> 409
-order-1     | INFO:order:POST /purchase/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,376] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,359] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,361] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,377] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,365] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,379] INFO in catalog: PATCH /update/1 -> 409
 catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,366] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,385] INFO in catalog: PATCH /update/1 -> 409
 catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,369] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,388] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,396] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,370] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,397] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,375] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,405] INFO in catalog: PATCH /update/1 -> 409
 catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,378] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,406] INFO in catalog: PATCH /update/1 -> 409
+catalog-1   | INFO:catalog:PATCH /update/1 -> 409
+catalog-1   | [2026-11-14 15:52:00,444] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,379] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,381] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,387] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,387] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,388] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,389] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,393] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,397] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,397] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,403] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,404] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,405] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,411] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,411] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,413] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,418] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,419] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,424] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,425] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:00,428] INFO in catalog: PATCH /update/1 -> 409
-catalog-1   | INFO:catalog:PATCH /update/1 -> 409
-catalog-1   | [2026-11-11 00:22:00,436] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:00,517] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:00,746] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
 
 $ docker compose down
- Container bazar-check-27575734-frontend-1 Stopping 
- Container bazar-check-27575734-frontend-1 Stopped 
- Container bazar-check-27575734-frontend-1 Removing 
- Container bazar-check-27575734-frontend-1 Removed 
- Container bazar-check-27575734-order-1 Stopping 
- Container bazar-check-27575734-order-1 Stopped 
- Container bazar-check-27575734-order-1 Removing 
- Container bazar-check-27575734-order-1 Removed 
- Container bazar-check-27575734-catalog-1 Stopping 
- Container bazar-check-27575734-catalog-1 Stopped 
- Container bazar-check-27575734-catalog-1 Removing 
- Container bazar-check-27575734-catalog-1 Removed 
- Network bazar-check-27575734_default Removing 
- Network bazar-check-27575734_default Removed 
+ Container bazar-check-92f636c5-frontend-1 Stopping
+ Container bazar-check-92f636c5-frontend-1 Stopped
+ Container bazar-check-92f636c5-frontend-1 Removing
+ Container bazar-check-92f636c5-frontend-1 Removed
+ Container bazar-check-92f636c5-order-1 Stopping
+ Container bazar-check-92f636c5-order-1 Stopped
+ Container bazar-check-92f636c5-order-1 Removing
+ Container bazar-check-92f636c5-order-1 Removed
+ Container bazar-check-92f636c5-catalog-1 Stopping
+ Container bazar-check-92f636c5-catalog-1 Stopped
+ Container bazar-check-92f636c5-catalog-1 Removing
+ Container bazar-check-92f636c5-catalog-1 Removed
+ Network bazar-check-92f636c5_default Removing
+ Network bazar-check-92f636c5_default Removed
 
 $ docker compose up -d --wait --wait-timeout 120
- Network bazar-check-27575734_default Creating 
- Network bazar-check-27575734_default Created 
- Container bazar-check-27575734-catalog-1 Creating 
- Container bazar-check-27575734-catalog-1 Created 
- Container bazar-check-27575734-order-1 Creating 
- Container bazar-check-27575734-order-1 Created 
- Container bazar-check-27575734-frontend-1 Creating 
- Container bazar-check-27575734-frontend-1 Created 
- Container bazar-check-27575734-catalog-1 Starting 
- Container bazar-check-27575734-catalog-1 Started 
- Container bazar-check-27575734-catalog-1 Waiting 
- Container bazar-check-27575734-catalog-1 Healthy 
- Container bazar-check-27575734-order-1 Starting 
- Container bazar-check-27575734-order-1 Started 
- Container bazar-check-27575734-order-1 Waiting 
- Container bazar-check-27575734-catalog-1 Waiting 
- Container bazar-check-27575734-catalog-1 Healthy 
- Container bazar-check-27575734-order-1 Healthy 
- Container bazar-check-27575734-frontend-1 Starting 
- Container bazar-check-27575734-frontend-1 Started 
- Container bazar-check-27575734-frontend-1 Waiting 
- Container bazar-check-27575734-catalog-1 Waiting 
- Container bazar-check-27575734-order-1 Waiting 
- Container bazar-check-27575734-order-1 Healthy 
- Container bazar-check-27575734-catalog-1 Healthy 
- Container bazar-check-27575734-frontend-1 Healthy 
+ Network bazar-check-92f636c5_default Creating
+ Network bazar-check-92f636c5_default Created
+ Container bazar-check-92f636c5-catalog-1 Creating
+ Container bazar-check-92f636c5-catalog-1 Created
+ Container bazar-check-92f636c5-order-1 Creating
+ Container bazar-check-92f636c5-order-1 Created
+ Container bazar-check-92f636c5-frontend-1 Creating
+ Container bazar-check-92f636c5-frontend-1 Created
+ Container bazar-check-92f636c5-catalog-1 Starting
+ Container bazar-check-92f636c5-catalog-1 Started
+ Container bazar-check-92f636c5-catalog-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Healthy
+ Container bazar-check-92f636c5-order-1 Starting
+ Container bazar-check-92f636c5-order-1 Started
+ Container bazar-check-92f636c5-catalog-1 Waiting
+ Container bazar-check-92f636c5-order-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Healthy
+ Container bazar-check-92f636c5-order-1 Healthy
+ Container bazar-check-92f636c5-frontend-1 Starting
+ Container bazar-check-92f636c5-frontend-1 Started
+ Container bazar-check-92f636c5-frontend-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Waiting
+ Container bazar-check-92f636c5-order-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Healthy
+ Container bazar-check-92f636c5-order-1 Healthy
+ Container bazar-check-92f636c5-frontend-1 Healthy
 
 $ docker compose exec -T order python -c import sqlite3; db=sqlite3.connect('/data/orders.db'); print(db.execute('SELECT COUNT(*) FROM orders').fetchone()[0]); db.close()
 11
@@ -548,132 +533,132 @@ $ docker compose exec -T catalog python -c import json,urllib.request; r=urllib.
 
 
 $ docker compose stop order
- Container bazar-check-27575734-order-1 Stopping 
- Container bazar-check-27575734-order-1 Stopped 
+ Container bazar-check-92f636c5-order-1 Stopping
+ Container bazar-check-92f636c5-order-1 Stopped
 
 $ docker compose up -d --wait --wait-timeout 120
- Container bazar-check-27575734-catalog-1 Running 
- Container bazar-check-27575734-frontend-1 Running 
- Container bazar-check-27575734-catalog-1 Waiting 
- Container bazar-check-27575734-catalog-1 Healthy 
- Container bazar-check-27575734-order-1 Starting 
- Container bazar-check-27575734-order-1 Started 
- Container bazar-check-27575734-catalog-1 Waiting 
- Container bazar-check-27575734-order-1 Waiting 
- Container bazar-check-27575734-catalog-1 Healthy 
- Container bazar-check-27575734-order-1 Healthy 
- Container bazar-check-27575734-order-1 Waiting 
- Container bazar-check-27575734-frontend-1 Waiting 
- Container bazar-check-27575734-catalog-1 Waiting 
- Container bazar-check-27575734-catalog-1 Healthy 
- Container bazar-check-27575734-order-1 Healthy 
- Container bazar-check-27575734-frontend-1 Healthy 
+ Container bazar-check-92f636c5-catalog-1 Running
+ Container bazar-check-92f636c5-frontend-1 Running
+ Container bazar-check-92f636c5-catalog-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Healthy
+ Container bazar-check-92f636c5-order-1 Starting
+ Container bazar-check-92f636c5-order-1 Started
+ Container bazar-check-92f636c5-order-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Healthy
+ Container bazar-check-92f636c5-order-1 Healthy
+ Container bazar-check-92f636c5-frontend-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Waiting
+ Container bazar-check-92f636c5-order-1 Waiting
+ Container bazar-check-92f636c5-catalog-1 Healthy
+ Container bazar-check-92f636c5-order-1 Healthy
+ Container bazar-check-92f636c5-frontend-1 Healthy
 
 $ docker compose logs --no-color
+frontend-1  | INFO:waitress:Serving on http://0.0.0.0:5000
+frontend-1  | [2026-11-14 15:52:24,668] INFO in frontend: GET /info/2 -> 200
+frontend-1  | INFO:frontend:GET /info/2 -> 200
+frontend-1  | [2026-11-14 15:52:24,828] INFO in frontend: GET /info/1 -> 200
+frontend-1  | INFO:frontend:GET /info/1 -> 200
 catalog-1   | INFO:waitress:Serving on http://0.0.0.0:5001
 order-1     | INFO:waitress:Serving on http://0.0.0.0:5002
-frontend-1  | INFO:waitress:Serving on http://0.0.0.0:5000
-frontend-1  | [2026-11-11 00:22:23,859] INFO in frontend: GET /info/2 -> 200
+order-1     | [2026-11-14 15:52:18,788] INFO in order: GET /health -> 200
+order-1     | INFO:order:GET /health -> 200
+order-1     | [2026-11-14 15:52:21,264] INFO in order: GET /health -> 200
+catalog-1   | [2026-11-14 15:52:12,915] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:15,336] INFO in catalog: GET /query/item/1 -> 200
+frontend-1  | [2026-11-14 15:52:24,835] INFO in frontend: GET /info/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
 frontend-1  | INFO:frontend:GET /info/2 -> 200
-frontend-1  | [2026-11-11 00:22:24,100] INFO in frontend: GET /info/1 -> 200
-catalog-1   | [2026-11-11 00:22:12,222] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:14,556] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-frontend-1  | INFO:frontend:GET /info/1 -> 200
-catalog-1   | [2026-11-11 00:22:16,866] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:19,231] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:21,540] INFO in catalog: GET /query/item/1 -> 200
-order-1     | [2026-11-11 00:22:18,033] INFO in order: GET /health -> 200
+frontend-1  | [2026-11-14 15:52:25,867] INFO in frontend: POST /purchase/1 -> 201
 order-1     | INFO:order:GET /health -> 200
-order-1     | [2026-11-11 00:22:20,344] INFO in order: GET /health -> 200
-order-1     | INFO:order:GET /health -> 200
-order-1     | [2026-11-11 00:22:22,643] INFO in order: GET /health -> 200
-frontend-1  | [2026-11-11 00:22:24,106] INFO in frontend: GET /info/2 -> 200
-order-1     | INFO:order:GET /health -> 200
-order-1     | [2026-11-11 00:22:24,987] INFO in order: GET /health -> 200
-frontend-1  | INFO:frontend:GET /info/2 -> 200
+order-1     | [2026-11-14 15:52:23,662] INFO in order: GET /health -> 200
+catalog-1   | [2026-11-14 15:52:17,971] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:23,845] INFO in catalog: GET /query/item/1 -> 200
-order-1     | INFO:order:GET /health -> 200
-order-1     | [2026-11-11 00:22:25,010] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
-order-1     | [2026-11-11 00:22:25,011] INFO in order: POST /purchase/1 -> 201
-order-1     | INFO:order:POST /purchase/1 -> 201
-order-1     | INFO:waitress:Serving on http://0.0.0.0:5002
-order-1     | [2026-11-11 00:22:36,791] INFO in order: GET /health -> 200
-order-1     | INFO:order:GET /health -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:23,858] INFO in catalog: GET /query/item/2 -> 200
-catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-catalog-1   | [2026-11-11 00:22:24,099] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-frontend-1  | [2026-11-11 00:22:25,012] INFO in frontend: POST /purchase/1 -> 201
 frontend-1  | INFO:frontend:POST /purchase/1 -> 201
-catalog-1   | [2026-11-11 00:22:24,105] INFO in catalog: GET /query/item/2 -> 200
-catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-frontend-1  | [2026-11-11 00:22:25,016] INFO in frontend: GET /info/1 -> 200
+catalog-1   | [2026-11-14 15:52:20,368] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+frontend-1  | [2026-11-14 15:52:25,886] INFO in frontend: GET /info/1 -> 200
 frontend-1  | INFO:frontend:GET /info/1 -> 200
-frontend-1  | [2026-11-11 00:22:26,339] INFO in frontend: GET /info/2 -> 200
+frontend-1  | [2026-11-14 15:52:27,079] INFO in frontend: GET /info/2 -> 200
+order-1     | INFO:order:GET /health -> 200
+order-1     | [2026-11-14 15:52:25,865] INFO in order: bought book How to get a good grade in DOS in 40 minutes a day.
+order-1     | INFO:order:bought book How to get a good grade in DOS in 40 minutes a day.
+catalog-1   | [2026-11-14 15:52:22,782] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:24,667] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:24,826] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:24,835] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:25,216] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:25,775] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | INFO:catalog:PATCH /update/1 -> 200
+order-1     | [2026-11-14 15:52:25,866] INFO in order: POST /purchase/1 -> 201
 frontend-1  | INFO:frontend:GET /info/2 -> 200
-frontend-1  | [2026-11-11 00:22:28,670] INFO in frontend: GET /info/2 -> 200
+order-1     | INFO:order:POST /purchase/1 -> 201
+order-1     | [2026-11-14 15:52:26,091] INFO in order: GET /health -> 200
+frontend-1  | [2026-11-14 15:52:29,454] INFO in frontend: GET /info/2 -> 200
 frontend-1  | INFO:frontend:GET /info/2 -> 200
-frontend-1  | [2026-11-11 00:22:30,496] INFO in frontend: POST /purchase/2 -> 503
+frontend-1  | [2026-11-14 15:52:31,416] INFO in frontend: POST /purchase/2 -> 503
 frontend-1  | INFO:frontend:POST /purchase/2 -> 503
-frontend-1  | [2026-11-11 00:22:30,979] INFO in frontend: GET /info/2 -> 200
+frontend-1  | [2026-11-14 15:52:31,917] INFO in frontend: GET /info/2 -> 200
+order-1     | INFO:order:GET /health -> 200
+order-1     | INFO:waitress:Serving on http://0.0.0.0:5002
+catalog-1   | [2026-11-14 15:52:25,849] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+order-1     | [2026-11-14 15:52:38,240] INFO in order: GET /health -> 200
 frontend-1  | INFO:frontend:GET /info/2 -> 200
-frontend-1  | [2026-11-11 00:22:33,313] INFO in frontend: GET /info/2 -> 200
-frontend-1  | INFO:frontend:GET /info/2 -> 200
-frontend-1  | [2026-11-11 00:22:35,620] INFO in frontend: GET /info/2 -> 200
-catalog-1   | [2026-11-11 00:22:24,940] INFO in catalog: PATCH /update/1 -> 200
+catalog-1   | [2026-11-14 15:52:25,859] INFO in catalog: PATCH /update/1 -> 200
 catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-catalog-1   | [2026-11-11 00:22:24,982] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:25,885] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:24,999] INFO in catalog: PATCH /update/1 -> 200
-catalog-1   | INFO:catalog:PATCH /update/1 -> 200
-catalog-1   | [2026-11-11 00:22:25,016] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:26,339] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:27,076] INFO in catalog: GET /query/item/2 -> 200
 catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-catalog-1   | [2026-11-11 00:22:26,341] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:27,692] INFO in catalog: GET /query/item/1 -> 200
 catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:28,669] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:29,452] INFO in catalog: GET /query/item/2 -> 200
+frontend-1  | [2026-11-14 15:52:34,351] INFO in frontend: GET /info/2 -> 200
 catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-catalog-1   | [2026-11-11 00:22:28,669] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:30,976] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:30,978] INFO in catalog: GET /query/item/2 -> 200
-catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-catalog-1   | [2026-11-11 00:22:33,307] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
-catalog-1   | [2026-11-11 00:22:33,312] INFO in catalog: GET /query/item/2 -> 200
-catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-catalog-1   | [2026-11-11 00:22:35,620] INFO in catalog: GET /query/item/2 -> 200
-catalog-1   | INFO:catalog:GET /query/item/2 -> 200
-catalog-1   | [2026-11-11 00:22:35,635] INFO in catalog: GET /query/item/1 -> 200
-catalog-1   | INFO:catalog:GET /query/item/1 -> 200
 frontend-1  | INFO:frontend:GET /info/2 -> 200
+frontend-1  | [2026-11-14 15:52:36,853] INFO in frontend: GET /info/2 -> 200
+frontend-1  | INFO:frontend:GET /info/2 -> 200
+catalog-1   | [2026-11-14 15:52:30,120] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:31,917] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:32,536] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:34,349] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:34,899] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+catalog-1   | [2026-11-14 15:52:36,852] INFO in catalog: GET /query/item/2 -> 200
+catalog-1   | INFO:catalog:GET /query/item/2 -> 200
+catalog-1   | [2026-11-14 15:52:37,434] INFO in catalog: GET /query/item/1 -> 200
+catalog-1   | INFO:catalog:GET /query/item/1 -> 200
+order-1     | INFO:order:GET /health -> 200
 
 $ docker compose down -v --remove-orphans
- Container bazar-check-27575734-frontend-1 Stopping 
- Container bazar-check-27575734-frontend-1 Stopped 
- Container bazar-check-27575734-frontend-1 Removing 
- Container bazar-check-27575734-frontend-1 Removed 
- Container bazar-check-27575734-order-1 Stopping 
- Container bazar-check-27575734-order-1 Stopped 
- Container bazar-check-27575734-order-1 Removing 
- Container bazar-check-27575734-order-1 Removed 
- Container bazar-check-27575734-catalog-1 Stopping 
- Container bazar-check-27575734-catalog-1 Stopped 
- Container bazar-check-27575734-catalog-1 Removing 
- Container bazar-check-27575734-catalog-1 Removed 
- Network bazar-check-27575734_default Removing 
- Volume bazar-check-27575734_catalog-data Removing 
- Volume bazar-check-27575734_order-data Removing 
- Volume bazar-check-27575734_catalog-data Removed 
- Volume bazar-check-27575734_order-data Removed 
- Network bazar-check-27575734_default Removed 
+ Container bazar-check-92f636c5-frontend-1 Stopping
+ Container bazar-check-92f636c5-frontend-1 Stopped
+ Container bazar-check-92f636c5-frontend-1 Removing
+ Container bazar-check-92f636c5-frontend-1 Removed
+ Container bazar-check-92f636c5-order-1 Stopping
+ Container bazar-check-92f636c5-order-1 Stopped
+ Container bazar-check-92f636c5-order-1 Removing
+ Container bazar-check-92f636c5-order-1 Removed
+ Container bazar-check-92f636c5-catalog-1 Stopping
+ Container bazar-check-92f636c5-catalog-1 Stopped
+ Container bazar-check-92f636c5-catalog-1 Removing
+ Container bazar-check-92f636c5-catalog-1 Removed
+ Volume bazar-check-92f636c5_order-data Removing
+ Volume bazar-check-92f636c5_catalog-data Removing
+ Network bazar-check-92f636c5_default Removing
+ Volume bazar-check-92f636c5_order-data Removed
+ Volume bazar-check-92f636c5_catalog-data Removed
+ Network bazar-check-92f636c5_default Removed
 

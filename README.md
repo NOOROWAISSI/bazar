@@ -111,10 +111,12 @@ Frontend reads CATALOG_URL and ORDER_URL at startup. Order reads CATALOG_URL and
 
 The last command requires running Docker. It builds copies of the current sources in a temporary context with a unique Compose project, random host port and disposable volumes. It runs the host client, thirty concurrent real purchases, restock/price updates, unavailable-service handling and container-recreation persistence. It removes only its test containers/volumes. Your normal inventory stays unchanged.
 
-Evidence: docs/test-output.txt (17 regression tests), docs/output-noor.txt (Catalog/gateway checks), docs/client-output.txt (host CLI), docs/docker-output.txt (full real integration), docs/docker-service-output.txt (component logs), docs/docker-status.json and docs/docker-build-output.txt. verify_noor.py uses an explicit Order test double for routing; verify_docker.py uses the real Order service.
+Evidence: docs/test-output.txt (23 regression tests), docs/output-noor.txt (Catalog/gateway checks), docs/client-output.txt (host CLI), docs/docker-output.txt (full real integration), docs/docker-service-output.txt (component logs), docs/docker-status.json and docs/docker-build-output.txt. verify_noor.py uses an explicit Order test double for routing; verify_docker.py uses the real Order service.
 
 Inspect live logs with `docker compose logs --no-color`. All services log HTTP method/path/status; Order also logs successful book titles. The design report is [docs/design.pdf](docs/design.pdf), with editable text in [docs/design.md](docs/design.md). More examples are in docs/client.md and docs/docker.md.
 
 ## Known limitations
 
 Catalog serializes stock writes, but decrementing stock and inserting an order are not one distributed transaction. Order attempts to restore stock when local order storage fails. Crashes, ambiguous network outcomes or failed compensation can still need reconciliation. There are no idempotency keys, authentication or payment/shipping workflows. These cases and possible improvements are explained in the report.
+
+Sara's latest six Client tests are integrated on noor. The combined regression suite contains 23 tests (3 Catalog, 14 Order and 6 Client). Contributor notes are preserved in [docs/contributions.md](docs/contributions.md).

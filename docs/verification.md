@@ -1,10 +1,10 @@
 # Final verification status
 
-Verified on 2026-11-11 after merging Sara's Order implementation into noor.
+Verified on 2026-11-14 after integrating Sara's latest Client tests and contribution notes into noor.
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Catalog and Order regression suite | 17 passed | test-output.txt |
+| Catalog, Order and Client regression suite | 23 passed | test-output.txt |
 | Catalog/Frontend verifier | Passed; Order is an explicit routing double in this check | output-noor.txt |
 | Host CLI | Real searches, details, purchase, saved receipt and stock decrement passed | client-output.txt; docker-output.txt |
 | Three real Linux containers | All healthy under Docker Compose | docker-status.json; docker-build-output.txt |
@@ -20,3 +20,5 @@ Run `python -m unittest discover -s tests -v`, `python verify_noor.py`, and (wit
 The Docker verifier uses copies of the integrated source in a unique temporary Compose project. Its test containers and disposable volumes were removed after success. Normal local databases and unrelated Docker projects were not changed.
 
 Known failure cases remain documented: cross-service purchase/crash windows, ambiguous timeouts, failed compensation and no idempotency keys. The project does not claim exactly-once distributed transactions. The main branch is unchanged; this delivery is on noor.
+
+The latest combined runtime and Docker configuration match the independently verified audit candidate. All 23 tests were also rerun directly in the final noor working tree. The report remains three pages; Sara's detailed notes are retained separately in contributions.md.

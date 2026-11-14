@@ -1,4 +1,4 @@
-Bazar full Docker verification: 2026-11-11T00:21:31.249113+00:00
+Bazar full Docker verification: 2026-11-14T15:51:34.376564+00:00
 
 PASS: three healthy Linux containers; only Frontend exposed to the host.
 

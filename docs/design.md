@@ -50,7 +50,7 @@ For local development, run catalog.py, order.py and frontend.py in separate term
 
 ## Testing and measured results
 
-The integrated regression suite passed 17 tests covering Catalog stock safety and Order success, persistence, concurrent buyers, dependency failures and compensation. verify_noor.py verifies Catalog/gateway behavior using a clearly identified Order test double for routing; it is not evidence of real order processing.
+The combined regression suite passed 23 tests: three Catalog, fourteen Order and six Client tests. They cover stock safety, purchases, persistence, concurrency, dependency failures, compensation and client behavior. verify_noor.py verifies Catalog/gateway behavior using a clearly identified Order test double for routing; it is not evidence of real order processing.
 
 verify_docker.py builds the current integrated sources in a temporary context and runs three real Linux containers with disposable volumes. The host client searched both categories and bought book 2, observing stock drop from ten to nine. Thirty real concurrent purchases for ten copies yielded ten HTTP 201 responses, twenty HTTP 409 responses and zero remaining stock. Container removal/recreation preserved stock and eleven orders. Restock, price change, another purchase and unavailable-Order JSON 503 behavior were also verified.
 

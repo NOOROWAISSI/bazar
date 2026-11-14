@@ -1,0 +1,2 @@
+# Preserve generated PDF bytes across Windows checkouts.
+*.pdf binary

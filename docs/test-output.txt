@@ -1,142 +1,154 @@
-test_concurrent_decrements_and_reinitialization (test_catalog.CatalogTests.test_concurrent_decrements_and_reinitialization) ... [2026-11-11 02:21:58,699] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,713] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,723] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,733] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,742] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,752] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,762] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,771] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,781] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,804] INFO in catalog: PATCH /update/1 -> 200
-[2026-11-11 02:21:58,806] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,814] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,828] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,844] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,859] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,874] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,889] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,905] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,921] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,936] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,951] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,966] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,982] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:58,997] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:59,014] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:59,029] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:59,044] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:59,060] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:59,075] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:59,092] INFO in catalog: PATCH /update/1 -> 409
-[2026-11-11 02:21:59,095] INFO in catalog: GET /query/item/1 -> 200
+test_concurrent_decrements_and_reinitialization (test_catalog.CatalogTests.test_concurrent_decrements_and_reinitialization) ... [2026-11-14 19:47:34,417] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,440] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,450] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,458] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,468] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,478] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,502] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,512] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,535] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,542] INFO in catalog: PATCH /update/1 -> 200
+[2026-11-14 19:47:34,562] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,563] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,578] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,594] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,609] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,625] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,640] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,655] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,671] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,685] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,701] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,748] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,750] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,780] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,781] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,795] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,811] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,831] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,841] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,863] INFO in catalog: PATCH /update/1 -> 409
+[2026-11-14 19:47:34,869] INFO in catalog: GET /query/item/1 -> 200
 ok
-test_json_errors_and_large_unknown_id (test_catalog.CatalogTests.test_json_errors_and_large_unknown_id) ... [2026-11-11 02:21:59,116] INFO in catalog: GET /missing -> 404
-[2026-11-11 02:21:59,118] INFO in catalog: GET /query/item/999 -> 404
-[2026-11-11 02:21:59,118] INFO in catalog: GET /query/item/99999999999999999999999 -> 404
+test_json_errors_and_large_unknown_id (test_catalog.CatalogTests.test_json_errors_and_large_unknown_id) ... [2026-11-14 19:47:34,889] INFO in catalog: GET /missing -> 404
+[2026-11-14 19:47:34,892] INFO in catalog: GET /query/item/999 -> 404
+[2026-11-14 19:47:34,893] INFO in catalog: GET /query/item/99999999999999999999999 -> 404
 ok
-test_rejected_combined_update_does_not_change_price (test_catalog.CatalogTests.test_rejected_combined_update_does_not_change_price) ... [2026-11-11 02:21:59,139] INFO in catalog: GET /query/item/2 -> 200
-[2026-11-11 02:21:59,142] INFO in catalog: PATCH /update/2 -> 409
-[2026-11-11 02:21:59,143] INFO in catalog: GET /query/item/2 -> 200
+test_rejected_combined_update_does_not_change_price (test_catalog.CatalogTests.test_rejected_combined_update_does_not_change_price) ... [2026-11-14 19:47:34,913] INFO in catalog: GET /query/item/2 -> 200
+[2026-11-14 19:47:34,915] INFO in catalog: PATCH /update/2 -> 409
+[2026-11-14 19:47:34,915] INFO in catalog: GET /query/item/2 -> 200
 ok
-test_catalog_connection_failure_returns_503 (test_order.OrderServiceTests.test_catalog_connection_failure_returns_503) ... [2026-11-11 02:21:59,178] INFO in order: POST /purchase/7 -> 503
+test_book_information (test_client.ClientTests.test_book_information) ... ok
+test_connection_failure_and_timeout_are_reported_without_retry (test_client.ClientTests.test_connection_failure_and_timeout_are_reported_without_retry) ... ok
+test_http_error_statuses_are_reported (test_client.ClientTests.test_http_error_statuses_are_reported) ... ok
+test_invalid_arguments_are_rejected_before_http_call (test_client.ClientTests.test_invalid_arguments_are_rejected_before_http_call) ... usage: client.py info [-h] item_id
+client.py info: error: argument item_id: book ID must be positive
+usage: client.py purchase [-h] item_id
+client.py purchase: error: argument item_id: book ID must be positive
+usage: client.py [-h] [--base-url BASE_URL] {search,info,purchase} ...
+client.py: error: argument command: invalid choice: 'unknown' (choose from 'search', 'info', 'purchase')
 ok
-test_catalog_timeout_before_book_response_returns_503 (test_order.OrderServiceTests.test_catalog_timeout_before_book_response_returns_503) ... [2026-11-11 02:21:59,756] INFO in order: POST /purchase/7 -> 503
-127.0.0.1 - - [11/Nov/2026 02:21:59] "GET /query/item/7 HTTP/1.1" 200 -
+test_search_by_topic_encodes_topic_and_displays_books (test_client.ClientTests.test_search_by_topic_encodes_topic_and_displays_books) ... ok
+test_successful_purchase_posts_and_displays_receipt (test_client.ClientTests.test_successful_purchase_posts_and_displays_receipt) ... ok
+test_catalog_connection_failure_returns_503 (test_order.OrderServiceTests.test_catalog_connection_failure_returns_503) ... [2026-11-14 19:47:35,054] INFO in order: POST /purchase/7 -> 503
 ok
-test_catalog_timeout_during_stock_update_returns_unknown_outcome (test_order.OrderServiceTests.test_catalog_timeout_during_stock_update_returns_unknown_outcome) ... 127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-[2026-11-11 02:22:00,287] INFO in order: POST /purchase/7 -> 503
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 200 -
+test_catalog_timeout_before_book_response_returns_503 (test_order.OrderServiceTests.test_catalog_timeout_before_book_response_returns_503) ... [2026-11-14 19:47:35,626] INFO in order: POST /purchase/7 -> 503
+127.0.0.1 - - [14/Nov/2026 19:47:35] "GET /query/item/7 HTTP/1.1" 200 -
 ok
-test_concurrent_purchases_never_exceed_available_stock (test_order.OrderServiceTests.test_concurrent_purchases_never_exceed_available_stock) ... 127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 409 -
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 409 -
-[2026-11-11 02:22:00,861] INFO in order: POST /purchase/7 -> 409
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 409 -
-[2026-11-11 02:22:00,866] INFO in order: POST /purchase/7 -> 409
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 409 -
-[2026-11-11 02:22:00,867] INFO in order: bought book Test Book
-[2026-11-11 02:22:00,869] INFO in order: POST /purchase/7 -> 409
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 409 -
-[2026-11-11 02:22:00,871] INFO in order: POST /purchase/7 -> 201
-[2026-11-11 02:22:00,873] INFO in order: POST /purchase/7 -> 409
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 409 -
-[2026-11-11 02:22:00,878] INFO in order: POST /purchase/7 -> 409
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 409 -
-[2026-11-11 02:22:00,880] INFO in order: POST /purchase/7 -> 409
-127.0.0.1 - - [11/Nov/2026 02:22:00] "PATCH /update/7 HTTP/1.1" 409 -
-[2026-11-11 02:22:00,886] INFO in order: POST /purchase/7 -> 409
-[2026-11-11 02:22:00,887] INFO in order: POST /purchase/7 -> 409
-[2026-11-11 02:22:00,893] INFO in order: bought book Test Book
-[2026-11-11 02:22:00,893] INFO in order: POST /purchase/7 -> 201
-[2026-11-11 02:22:00,904] INFO in order: bought book Test Book
-[2026-11-11 02:22:00,904] INFO in order: POST /purchase/7 -> 201
-[2026-11-11 02:22:00,920] INFO in order: bought book Test Book
-[2026-11-11 02:22:00,921] INFO in order: POST /purchase/7 -> 201
+test_catalog_timeout_during_stock_update_returns_unknown_outcome (test_order.OrderServiceTests.test_catalog_timeout_during_stock_update_returns_unknown_outcome) ... 127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+[2026-11-14 19:47:36,177] INFO in order: POST /purchase/7 -> 503
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 200 -
 ok
-test_failed_order_insert_attempts_stock_compensation (test_order.OrderServiceTests.test_failed_order_insert_attempts_stock_compensation) ... 127.0.0.1 - - [11/Nov/2026 02:22:01] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:01] "PATCH /update/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:01] "PATCH /update/7 HTTP/1.1" 200 -
-[2026-11-11 02:22:01,425] INFO in order: POST /purchase/7 -> 500
+test_concurrent_purchases_never_exceed_available_stock (test_order.OrderServiceTests.test_concurrent_purchases_never_exceed_available_stock) ... 127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 409 -
+[2026-11-14 19:47:36,818] INFO in order: POST /purchase/7 -> 409
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 409 -
+[2026-11-14 19:47:36,823] INFO in order: bought book Test Book
+[2026-11-14 19:47:36,824] INFO in order: POST /purchase/7 -> 201
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 409 -
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 409 -
+[2026-11-14 19:47:36,826] INFO in order: POST /purchase/7 -> 409
+[2026-11-14 19:47:36,830] INFO in order: bought book Test Book
+[2026-11-14 19:47:36,835] INFO in order: POST /purchase/7 -> 409
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 409 -
+[2026-11-14 19:47:36,835] INFO in order: POST /purchase/7 -> 201
+[2026-11-14 19:47:36,835] INFO in order: POST /purchase/7 -> 409
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 409 -
+[2026-11-14 19:47:36,841] INFO in order: bought book Test Book
+[2026-11-14 19:47:36,846] INFO in order: POST /purchase/7 -> 409
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 409 -
+[2026-11-14 19:47:36,848] INFO in order: POST /purchase/7 -> 201
+127.0.0.1 - - [14/Nov/2026 19:47:36] "PATCH /update/7 HTTP/1.1" 409 -
+[2026-11-14 19:47:36,852] INFO in order: POST /purchase/7 -> 409
+[2026-11-14 19:47:36,854] INFO in order: POST /purchase/7 -> 409
+[2026-11-14 19:47:36,861] INFO in order: POST /purchase/7 -> 409
+[2026-11-14 19:47:36,862] INFO in order: bought book Test Book
+[2026-11-14 19:47:36,862] INFO in order: POST /purchase/7 -> 201
 ok
-test_failed_stock_compensation_returns_clear_error (test_order.OrderServiceTests.test_failed_stock_compensation_returns_clear_error) ... 127.0.0.1 - - [11/Nov/2026 02:22:01] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:01] "PATCH /update/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:01] "PATCH /update/7 HTTP/1.1" 500 -
-[2026-11-11 02:22:01,968] INFO in order: POST /purchase/7 -> 500
+test_failed_order_insert_attempts_stock_compensation (test_order.OrderServiceTests.test_failed_order_insert_attempts_stock_compensation) ... 127.0.0.1 - - [14/Nov/2026 19:47:37] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:37] "PATCH /update/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:37] "PATCH /update/7 HTTP/1.1" 200 -
+[2026-11-14 19:47:37,416] INFO in order: POST /purchase/7 -> 500
 ok
-test_nonexistent_book_returns_http_404 (test_order.OrderServiceTests.test_nonexistent_book_returns_http_404) ... 127.0.0.1 - - [11/Nov/2026 02:22:02] "GET /query/item/999 HTTP/1.1" 404 -
-[2026-11-11 02:22:02,507] INFO in order: POST /purchase/999 -> 404
+test_failed_stock_compensation_returns_clear_error (test_order.OrderServiceTests.test_failed_stock_compensation_returns_clear_error) ... 127.0.0.1 - - [14/Nov/2026 19:47:37] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:37] "PATCH /update/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:37] "PATCH /update/7 HTTP/1.1" 500 -
+[2026-11-14 19:47:37,996] INFO in order: POST /purchase/7 -> 500
 ok
-test_order_persists_after_service_restart (test_order.OrderServiceTests.test_order_persists_after_service_restart) ... 127.0.0.1 - - [11/Nov/2026 02:22:03] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:03] "PATCH /update/7 HTTP/1.1" 200 -
-[2026-11-11 02:22:03,061] INFO in order: bought book Test Book
-[2026-11-11 02:22:03,062] INFO in order: POST /purchase/7 -> 201
+test_nonexistent_book_returns_http_404 (test_order.OrderServiceTests.test_nonexistent_book_returns_http_404) ... 127.0.0.1 - - [14/Nov/2026 19:47:38] "GET /query/item/999 HTTP/1.1" 404 -
+[2026-11-14 19:47:38,526] INFO in order: POST /purchase/999 -> 404
 ok
-test_out_of_stock_book_returns_http_409 (test_order.OrderServiceTests.test_out_of_stock_book_returns_http_409) ... 127.0.0.1 - - [11/Nov/2026 02:22:03] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:03] "PATCH /update/7 HTTP/1.1" 409 -
-[2026-11-11 02:22:03,585] INFO in order: POST /purchase/7 -> 409
+test_order_persists_after_service_restart (test_order.OrderServiceTests.test_order_persists_after_service_restart) ... 127.0.0.1 - - [14/Nov/2026 19:47:39] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:39] "PATCH /update/7 HTTP/1.1" 200 -
+[2026-11-14 19:47:39,089] INFO in order: bought book Test Book
+[2026-11-14 19:47:39,089] INFO in order: POST /purchase/7 -> 201
 ok
-test_purchasing_never_makes_stock_negative (test_order.OrderServiceTests.test_purchasing_never_makes_stock_negative) ... 127.0.0.1 - - [11/Nov/2026 02:22:04] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:04] "PATCH /update/7 HTTP/1.1" 200 -
-[2026-11-11 02:22:04,155] INFO in order: bought book Test Book
-[2026-11-11 02:22:04,157] INFO in order: POST /purchase/7 -> 201
-127.0.0.1 - - [11/Nov/2026 02:22:04] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:04] "PATCH /update/7 HTTP/1.1" 409 -
-[2026-11-11 02:22:04,170] INFO in order: POST /purchase/7 -> 409
+test_out_of_stock_book_returns_http_409 (test_order.OrderServiceTests.test_out_of_stock_book_returns_http_409) ... 127.0.0.1 - - [14/Nov/2026 19:47:39] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:39] "PATCH /update/7 HTTP/1.1" 409 -
+[2026-11-14 19:47:39,643] INFO in order: POST /purchase/7 -> 409
 ok
-test_successful_order_is_saved_in_sqlite (test_order.OrderServiceTests.test_successful_order_is_saved_in_sqlite) ... 127.0.0.1 - - [11/Nov/2026 02:22:04] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:04] "PATCH /update/7 HTTP/1.1" 200 -
-[2026-11-11 02:22:04,713] INFO in order: bought book Test Book
-[2026-11-11 02:22:04,713] INFO in order: POST /purchase/7 -> 201
+test_purchasing_never_makes_stock_negative (test_order.OrderServiceTests.test_purchasing_never_makes_stock_negative) ... 127.0.0.1 - - [14/Nov/2026 19:47:40] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:40] "PATCH /update/7 HTTP/1.1" 200 -
+[2026-11-14 19:47:40,206] INFO in order: bought book Test Book
+[2026-11-14 19:47:40,207] INFO in order: POST /purchase/7 -> 201
+127.0.0.1 - - [14/Nov/2026 19:47:40] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:40] "PATCH /update/7 HTTP/1.1" 409 -
+[2026-11-14 19:47:40,231] INFO in order: POST /purchase/7 -> 409
 ok
-test_successful_purchase_returns_http_201 (test_order.OrderServiceTests.test_successful_purchase_returns_http_201) ... 127.0.0.1 - - [11/Nov/2026 02:22:05] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:05] "PATCH /update/7 HTTP/1.1" 200 -
-[2026-11-11 02:22:05,255] INFO in order: bought book Test Book
-[2026-11-11 02:22:05,255] INFO in order: POST /purchase/7 -> 201
+test_successful_order_is_saved_in_sqlite (test_order.OrderServiceTests.test_successful_order_is_saved_in_sqlite) ... 127.0.0.1 - - [14/Nov/2026 19:47:40] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:40] "PATCH /update/7 HTTP/1.1" 200 -
+[2026-11-14 19:47:40,782] INFO in order: bought book Test Book
+[2026-11-14 19:47:40,783] INFO in order: POST /purchase/7 -> 201
 ok
-test_unexpected_catalog_book_response_returns_502 (test_order.OrderServiceTests.test_unexpected_catalog_book_response_returns_502) ... 127.0.0.1 - - [11/Nov/2026 02:22:05] "GET /query/item/7 HTTP/1.1" 503 -
-[2026-11-11 02:22:05,791] INFO in order: POST /purchase/7 -> 502
+test_successful_purchase_returns_http_201 (test_order.OrderServiceTests.test_successful_purchase_returns_http_201) ... 127.0.0.1 - - [14/Nov/2026 19:47:41] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:41] "PATCH /update/7 HTTP/1.1" 200 -
+[2026-11-14 19:47:41,326] INFO in order: bought book Test Book
+[2026-11-14 19:47:41,327] INFO in order: POST /purchase/7 -> 201
 ok
-test_unexpected_catalog_stock_response_returns_502 (test_order.OrderServiceTests.test_unexpected_catalog_stock_response_returns_502) ... 127.0.0.1 - - [11/Nov/2026 02:22:06] "GET /query/item/7 HTTP/1.1" 200 -
-127.0.0.1 - - [11/Nov/2026 02:22:06] "PATCH /update/7 HTTP/1.1" 500 -
-[2026-11-11 02:22:06,341] INFO in order: POST /purchase/7 -> 502
+test_unexpected_catalog_book_response_returns_502 (test_order.OrderServiceTests.test_unexpected_catalog_book_response_returns_502) ... 127.0.0.1 - - [14/Nov/2026 19:47:41] "GET /query/item/7 HTTP/1.1" 503 -
+[2026-11-14 19:47:41,859] INFO in order: POST /purchase/7 -> 502
+ok
+test_unexpected_catalog_stock_response_returns_502 (test_order.OrderServiceTests.test_unexpected_catalog_stock_response_returns_502) ... 127.0.0.1 - - [14/Nov/2026 19:47:42] "GET /query/item/7 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Nov/2026 19:47:42] "PATCH /update/7 HTTP/1.1" 500 -
+[2026-11-14 19:47:42,412] INFO in order: POST /purchase/7 -> 502
 ok
 
 ----------------------------------------------------------------------
-Ran 17 tests in 8.201s
+Ran 23 tests in 8.594s
 
 OK
