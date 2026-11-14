@@ -1,7 +1,9 @@
 # Bazar.com
 
 Distributed and Operating Systems - Lab 1
-Noor and Sara
+
+- Noor Owaissi - 12217844
+- Sara Abd Aldayem - 12340856
 
 A small bookstore with three services:
 - Catalog stores the four books, prices and stock.
