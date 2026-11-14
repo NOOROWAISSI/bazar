@@ -1,0 +1,55 @@
+# Reference configuration authored by Noor (origin/noor, commit 82ec43c).
+services:
+  catalog:
+    build: .
+    command: ["waitress-serve", "--listen=0.0.0.0:5001", "catalog:app"]
+    volumes:
+      - catalog-data:/app/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5001/query/item/1', timeout=2)"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+      start_period: 3s
+
+  order:
+    build: .
+    command: ["waitress-serve", "--listen=0.0.0.0:5002", "order:app"]
+    environment:
+      CATALOG_URL: http://catalog:5001
+      ORDER_DATABASE_PATH: /data/orders.db
+    volumes:
+      - order-data:/data
+    depends_on:
+      catalog:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5002/health', timeout=2)"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+      start_period: 3s
+
+  frontend:
+    build: .
+    command: ["waitress-serve", "--listen=0.0.0.0:5000", "frontend:app"]
+    environment:
+      CATALOG_URL: http://catalog:5001
+      ORDER_URL: http://order:5002
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-5000}:5000"
+    depends_on:
+      catalog:
+        condition: service_healthy
+      order:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/info/2', timeout=2)"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+      start_period: 3s
+
+volumes:
+  catalog-data:
+  order-data:
