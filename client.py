@@ -1,4 +1,7 @@
-"""Host command-line client. Run python client.py --help for examples."""
+"""Host command-line client. Run python client.py --help for examples.
+
+Original implementation by Noor (origin/noor commit 2bb1d28).
+"""
 
 import argparse
 import json

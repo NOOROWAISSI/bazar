@@ -1,3 +1,4 @@
+# Reference configuration authored by Noor (origin/noor, commit 1b874a6).
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
